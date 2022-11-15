@@ -26,7 +26,6 @@ let FindrLocation = require('./models/dbFindrModel');
 let morgan = require('morgan');
 let axios = require('axios');
 const AppError = require('./factory/AppError');
-//const { NoEmitOnErrorsPlugin } = require('webpack');
 const wrapAsync = require('./factory/wrapAsync');
 
 //set local server PORT
