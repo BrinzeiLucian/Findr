@@ -1,5 +1,5 @@
 
-/** NPM installs
+/** NPM required installs
  * npm init -y (for package json)
  * npm i express (install express)
  * npm i nodemon (for server restart -> local install) OR npm install -g nodemon (global install)
