@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate') %>
+        <h1><%= pageName %></h1>
+        <% for (let items of Findr){ %>
+                <div class="card mb-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="<%= items.image %>" alt="location image" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= items.title %> 
+                                </h5>
+                                <p class="card-text">
+                                    <%= items.description %> 
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted"><%= items.location %></small> 
+                                </p>
+                                <a href="/locations/<%= items._id %>" class="btn btn-info">View more details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>

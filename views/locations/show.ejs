@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <div class="col-6 offset-3 p-3">
+        <div class="card">
+            <img src="<%= data.image %> " class="card-img-top" alt="A descriptive image for <%= data.title %>">
+            <div class="card-body">
+              <h1 class="card-title"><%= data.title %></h1>
+              <hr/>
+              <h3 class="card-title text-muted"><%= data.location %></h3>
+              <hr>
+              <p class="card-text"><%= data.description %></p>
+              <hr>
+              <p class="card-text">E-mail: <a href="mailto:<%= data.email %>"><%= data.email %></a></p>
+              <hr>
+              <p class="card-text">Website: <a href="<%= data.website %>"><%= data.website %></a></p>
+              <hr>
+              <p class="card-text">Phone: <a href="Tel: +<%= data.phone %>"><%= data.phone %></a></p>
+            </div>
+            <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-2">
+                <a href="/locations/edit/<%= data._id %>"><input type="button" class="btn btn-info" value="Edit"></a>
+                <a href="/locations"><input type="button" class="btn btn-info" value="View all"></a>
+                <form action="/locations/<%= data._id %>?_method=DELETE" method="POST"><button class="btn btn-danger">Delete</button></form>
+            </div>
+            <div class="card-footer text-muted">
+                Created 2 days ago
+              </div>
+          </div>
+    </div>
+</div>
