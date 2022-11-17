@@ -142,16 +142,16 @@ app.get('/', (req, res) => {
 })
 
 //---------------------------------//
-
-//not found page
-app.get('/notFound', (req, res) => {
-    res.render('notFound', {pageName: 'Not Found !'});
+/*
+//error
+app.get('/error', (req, res) => {
+    res.render('error', {pageName: 'Not Found !'});
 });
+*/
 
-//redirect to page on incorrect path
-app.get('*', (req, res, next) => {
+//redirect on incorrect path
+app.all('*', (req, res, next) => {
     next(new AppError('Page Not found !', 404));
-    //res.redirect('/notFound');
 });
 
 //handle cast error
@@ -165,9 +165,12 @@ app.use((err, req, res, next) => {
 });
 
 //custom default error handler 
-app.use((err, req, res, next)=> {
-    const { status = 500, message = `${err}` } = err;
-    res.status(status).send(message);
+app.use((err, req, res, next) => {
+    let { statusCode = 500 } = err;
+    if(!err.message){
+        err.message = 'Error';
+    };
+    res.status(err.status || statusCode).render('error', { err, pageName: 'Error' });
 });
 
 //port setup
