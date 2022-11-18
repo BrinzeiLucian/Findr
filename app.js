@@ -29,6 +29,7 @@ let axios = require('axios');
 const AppError = require('./factory/AppError');
 const wrapAsync = require('./factory/wrapAsync');
 const Joi = require('joi');
+const { validationLocationsSchemaJOI } = require('./factory/validationSchemas.js');
 
 //set local server PORT
 let port = 8080;
@@ -63,6 +64,16 @@ app.set('views', path.join(__dirname, '/views'));
 
 //---------------------------------//
 
+let validateLocations = (req, res, next) => {    
+    let { error } = validationLocationsSchemaJOI.validate(req.body);
+    if(error){
+        let msg = error.details.map(el => el.message).join(`,`);
+        throw new AppError(msg, 400);
+    } else{
+        next();
+    };
+};
+
 //auth function
 let verifyPassword = (req, res, next) => {
     let { password } = req.query;
@@ -79,13 +90,6 @@ app.get('/secret', verifyPassword, (req, res) => {
     res.send(`Logged in succesfully`);
 });
 
-/*
-//admin route
-app.get('/admin', (req, res, next)=>{
-    throw new AppError('Not an admin !', 403);
-});
-*/
-
 //delete location
 app.delete('/locations/:id', wrapAsync (async ( req, res, next ) => {
     let { id } = req.params;
@@ -94,7 +98,7 @@ app.delete('/locations/:id', wrapAsync (async ( req, res, next ) => {
 }));
 
 //update location
-app.put('/locations/:id', wrapAsync (async (req, res, next) => {
+app.put('/locations/:id', validateLocations, wrapAsync (async (req, res, next) => {
     let { id } = req.params;
     let updateData = await FindrLocation.findByIdAndUpdate(id, { ...req.body.locations }, { runValidators: true, new: true } );
     res.redirect(`/locations/${updateData._id}`);
@@ -114,24 +118,8 @@ app.get('/locations/new', (req, res) => {
     res.render('locations/new', {pageName: 'New Location'});
 });
 
-app.post('/locations', wrapAsync (async (req, res, next) => {
-    //if(!req.body.locations){throw new AppError('invalid data !', 400);};
-    
-    const locationsSchemaJOI = Joi.object({
-        locations: Joi.object({
-            title: Joi.string().required(),
-            location: Joi.string().required(),
-            description: Joi.string().required(),
-            image: Joi.string().required(),
-        }).required()
-    });
-    
-    let { error } = locationsSchemaJOI.validate(req.body);
-    if(error){
-        let msg = error.details.map(el => el.message).join(`,`);
-        throw new AppError(msg, 400);
-    };
-        
+app.post('/locations', validateLocations, wrapAsync (async (req, res, next) => {
+    //if(!req.body.locations){throw new AppError('invalid data !', 400);};    
     let newLocation = FindrLocation(req.body.locations);
     await newLocation.save();
     res.redirect(`locations/${newLocation._id}`);
