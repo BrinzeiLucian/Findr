@@ -61,8 +61,9 @@ app.use(express.static(path.join(__dirname, 'utils')));
 app.engine('ejs', ejsmate);
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
-app.set('views', path.join(__dirname, '/'));
+app.set('views', [__dirname + '/', __dirname + '/views']);
+//app.set('views', path.join(__dirname, '/views'));
+//app.set('views', path.join(__dirname, '/'));
 
 
 //---------------------------------//
@@ -143,7 +144,7 @@ app.get('/locations', wrapAsync (async (req, res, next) => {
         res.render('locations/index', {pageName: 'Findr Locations', Findr});
 }));
 
-//home
+//root homepage
 app.get('/', (req, res) => {
     res.render('index.html');
 });
