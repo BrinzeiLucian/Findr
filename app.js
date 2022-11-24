@@ -59,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'utils')));
 
 //ejs setup (instead of require)
 app.engine('ejs', ejsmate);
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
@@ -82,7 +83,7 @@ let verifyPassword = (req, res, next) => {
         next();
     };
     throw new AppError('Password required', 401);
-}; 
+};
 
 //secret route with auth
 app.get('/secret', verifyPassword, (req, res) => {
@@ -142,8 +143,8 @@ app.get('/locations', wrapAsync (async (req, res, next) => {
 
 //home
 app.get('/', (req, res) => {
-    res.render('home', {pageName: 'Findr'});
-})
+    res.render('index.html');
+});
 
 //---------------------------------//
 /*
