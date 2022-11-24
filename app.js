@@ -55,7 +55,8 @@ app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
 
 //serving static files
-app.use(express.static(path.join(__dirname, 'utils')));
+app.use(express.static(path.join(__dirname, 'files')));
+app.use(express.static(path.join(__dirname, 'customs')));
 
 //ejs setup (instead of require)
 app.engine('ejs', ejsmate);
@@ -146,16 +147,10 @@ app.get('/locations', wrapAsync (async (req, res, next) => {
 
 //root homepage
 app.get('/', (req, res) => {
-    res.render('index.html');
+    res.render('home', { pageName: 'Home' });
 });
 
 //---------------------------------//
-/*
-//error
-app.get('/error', (req, res) => {
-    res.render('error', {pageName: 'Not Found !'});
-});
-*/
 
 //redirect on incorrect path
 app.all('*', (req, res, next) => {
