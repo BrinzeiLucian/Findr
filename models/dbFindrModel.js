@@ -28,7 +28,13 @@ let dbFindrSchema = new Schema ({
     },
     email: {
         type: String
-    }
+    },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Review'
+        }
+    ]
 });
 
 module.exports = mongoose.model('FindrLocation', dbFindrSchema);

@@ -29,7 +29,8 @@ let axios = require('axios');
 const AppError = require('./factory/AppError');
 const wrapAsync = require('./factory/wrapAsync');
 const Joi = require('joi');
-const { validationLocationsSchemaJOI } = require('./factory/validationSchemas.js');
+const { validationLocationsSchemaJOI, reviewSchemaJOI } = require('./factory/validationSchemas.js');
+let Review = require('./models/reviewsModel');
 
 //set local server PORT
 let port = 8080;
@@ -55,7 +56,6 @@ app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
 
 //serving static files
-app.use(express.static(path.join(__dirname, 'files')));
 app.use(express.static(path.join(__dirname, 'customs')));
 
 //ejs setup (instead of require)
@@ -63,9 +63,6 @@ app.engine('ejs', ejsmate);
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', [__dirname + '/', __dirname + '/views']);
-//app.set('views', path.join(__dirname, '/views'));
-//app.set('views', path.join(__dirname, '/'));
-
 
 //---------------------------------//
 
@@ -78,6 +75,16 @@ let validateLocations = (req, res, next) => {
         next();
     };
 };
+
+let validateReviews = (req, res, next) => {
+    let { error } = reviewSchemaJOI.validate(req.body);
+    if(error){
+        let msg = error.details.map(el => el.message).join(`,`);
+        throw new AppError(msg, 400);
+    } else{
+        next();
+    };
+}
 
 //auth function
 let verifyPassword = (req, res, next) => {
@@ -124,7 +131,6 @@ app.get('/locations/new', (req, res) => {
 });
 
 app.post('/locations', validateLocations, wrapAsync (async (req, res, next) => {
-    //if(!req.body.locations){throw new AppError('invalid data !', 400);};    
     let newLocation = FindrLocation(req.body.locations);
     await newLocation.save();
     res.redirect(`locations/${newLocation._id}`);
@@ -136,18 +142,29 @@ app.get('/locations/:id', wrapAsync (async (req, res, next) => {
         if(!data){
             throw new AppError('Location not found !', 404);
         };
-    res.render('locations/show', {pageName: `Location page`, data});
+    res.render('locations/show', { pageName: `Location page`, data });
+}));
+
+//reviews
+app.post('/locations/reviews/:id', validateReviews, wrapAsync(async(req, res) => {
+    let post = await FindrLocation.findById(req.params.id);
+    let review = new Review(req.body.review);
+    post.reviews.push(review);
+    await review.save();
+    await post.save();
+    console.log(req.body.review);
+    res.redirect(`/locations/${post._id}`);
 }));
 
 //all locations
 app.get('/locations', wrapAsync (async (req, res, next) => {
         let Findr = await FindrLocation.find({});
-        res.render('locations/index', {pageName: 'Findr Locations', Findr});
+        res.render('locations/index', { pageName: 'Findr Locations', Findr });
 }));
 
 //root homepage
 app.get('/', (req, res) => {
-    res.render('home', { pageName: 'Home' });
+    res.render('home', { pageName: 'Home'});
 });
 
 //---------------------------------//
