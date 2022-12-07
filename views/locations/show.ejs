@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 <div class="row">
-    <div class="col-6 offset-3 p-3">
+    <div class="col-6">
         <div class="card">
             <img src="<%= data.image %> " class="card-img-top" alt="A descriptive image for <%= data.title %>">
             <div class="card-body">
@@ -23,52 +23,83 @@
             </div>
             <div class="card-footer text-muted">
                 Created 2 days ago
-              </div>
-          </div>
-          <br>
-          <!--COMMENT SECTION-->
-          <form action="/locations/reviews/<%= data._id %>" method="POST" class="mb-3 validate-form" novalidate>
-            <div class="card">
-              <div class="row">
-                  <div class="col-2">
-                      <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" width="70" class="rounded-circle mt-4 offset-2">
-                  </div>
-                  <div class="col-10">
-                      <div class="comment-box ml-2">
-                          <label for="rating">Leave a review:</label>
-                          <br>
-                          <div class="rating" name="review[rating]" id="rating">
-                              <input type="radio" name="review[rating]" value="5" id="5"><label for="5">☆</label>
-                              <input type="radio" name="review[rating]" value="4" id="4"><label for="4">☆</label> 
-                              <input type="radio" name="review[rating]" value="3" id="3"><label for="3">☆</label>
-                              <input type="radio" name="review[rating]" value="2" id="2"><label for="2">☆</label>
-                              <input type="radio" name="review[rating]" value="1" id="1" required="required"/><label for="1">☆</label>
-                          </div>
-                          <div class="comment-area">
-                              <textarea class="form-control" name="review[comment]" id="comment" cols="30" rows="4" required="required" placeholder="Leave a comment..."></textarea>
-                          </div>
-                          <div class="comment-btns mt-3">
-                              <div class="row">
-                                  <div class="col-6">
-                                      <div class="pull-left">
-                                        <a href="/locations/<%= data._id %>">
-                                          <input type="button" class="btn btn-danger" value="Cancel"/>
-                                       </a>      
-                                      </div>
-                                  </div>
-                                  <div class="col-6">
-                                      <div class="pull-right">
-                                      <button class="btn btn-info">Send<i class="fa fa-long-arrow-right ml-1"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <form action="/locations/reviews/<%= data._id %>" method="POST" class="mb-3 validate-form" novalidate>
+          <div class="card">
+            <div class="row">
+                <div class="col-2">
+                    <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" width="70" class="rounded-circle mt-4 offset-2">
+                </div>
+                <div class="col-10">
+                    <div class="comment-box ml-2">
+                        <label for="rating">Leave a review:</label>
+                        <br>
+                        <div class="rating" name="review[rating]" id="rating">
+                            <input type="radio" name="review[rating]" value="5" id="5"><label for="5">☆</label>
+                            <input type="radio" name="review[rating]" value="4" id="4"><label for="4">☆</label> 
+                            <input type="radio" name="review[rating]" value="3" id="3"><label for="3">☆</label>
+                            <input type="radio" name="review[rating]" value="2" id="2"><label for="2">☆</label>
+                            <input type="radio" name="review[rating]" value="1" id="1" required="required"/><label for="1">☆</label>
+                        </div>
+                        <div class="comment-area">
+                            <textarea class="form-control" name="review[comment]" id="comment" cols="30" rows="4" required="required" placeholder="Leave a comment..."></textarea>
+                        </div>
+                        <div class="comment-btns mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="pull-left">
+                                      <a href="/locations/<%= data._id %>">
+                                        <input type="button" class="btn btn-danger" value="Cancel"/>
+                                     </a>      
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="pull-right">
+                                    <button class="btn btn-info">Send<i class="fa fa-long-arrow-right ml-1"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>            
+      </form>
+      <!--DISPLAYED REVIEWS-->
+      <% for(let review of data.reviews ) { %>
+          <div class="mb-3">
+              <div class="card">
+                  <div class="row">
+                      <div class="col-2">
+                          <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" width="70" class="rounded-circle mt-4 offset-2">
+                      </div>
+                      <div class="col-10">
+                          <div class="comment-box ml-2">
+                              <label for="rating">Username</label>
+                              <br>
+                              <div class="rating" name="review[rating]" id="rating">
+                                  <input type="radio" name="review[rating]" value="1" id="1" required="required"/><label for="1"><%= review.rating %></label>
+                              </div>
+                              <br>
+                              <div class="comment-area">
+                                  <p><%= review.comment %></p>
                                       </div>
                                   </div>
                               </div>
                           </div>
                       </div>
+                    <div class="card-footer text-muted">
+                        <p>Created 2 days ago</p> 
+                    </div>
                   </div>
+              <% } %> 
               </div>
-          </div>            
-        </form>
-    </div>
+          </div> 
+      </div>
+  </div>
 </div>
 
 <!-- REVIEW / COMMENTS CSS & JS SCRIPT -->
@@ -148,5 +179,18 @@
 </style>
 
 <script>
+//function
+let formatDate = (date = new Date()) => {
+   
+   //get data
+   let time = `${date.getHours()}:${date.getMinutes()}`;
+   let days = date.getDate();
+   let months = date.getMonth() + 1;
+   let years = date.getFullYear();
 
+   //format
+   let format = `${time} ${days}/${months}/${years}`;
+
+   message = format;
+};
 </script>

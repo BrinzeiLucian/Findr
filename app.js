@@ -138,10 +138,9 @@ app.post('/locations', validateLocations, wrapAsync (async (req, res, next) => {
 
 //location id
 app.get('/locations/:id', wrapAsync (async (req, res, next) => {
-    let data = await FindrLocation.findById(req.params.id);
-        if(!data){
-            throw new AppError('Location not found !', 404);
-        };
+    let data = await FindrLocation.findById(req.params.id).populate('reviews');
+    console.log(data);
+        if(!data){throw new AppError('Location not found !', 404);};
     res.render('locations/show', { pageName: `Location page`, data });
 }));
 
