@@ -144,6 +144,14 @@ app.get('/locations/:id', wrapAsync (async (req, res, next) => {
     res.render('locations/show', { pageName: `Location page`, data });
 }));
 
+//reviews delete
+app.delete('/locations/reviews/:id/:reviewId', wrapAsync(async(req, res) => {
+    const { id, reviewId } = req.params;
+    await FindrLocation.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+    await Review.findByIdAndDelete(req.param.reviewId);
+    res.redirect(`/locations/${id}`);
+}));
+
 //reviews
 app.post('/locations/reviews/:id', validateReviews, wrapAsync(async(req, res) => {
     let post = await FindrLocation.findById(req.params.id);

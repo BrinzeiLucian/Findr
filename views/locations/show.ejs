@@ -49,16 +49,11 @@
                         </div>
                         <div class="comment-btns mt-3">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="pull-left">
-                                      <a href="/locations/<%= data._id %>">
-                                        <input type="button" class="btn btn-danger" value="Cancel"/>
-                                     </a>      
-                                    </div>
+                                <div class="col-0">
                                 </div>
-                                <div class="col-6">
-                                    <div class="pull-right">
-                                    <button class="btn btn-info">Send<i class="fa fa-long-arrow-right ml-1"></i></button>
+                                <div class="col-0">
+                                    <div class="pull-left">
+                                    <button class="btn btn-info">Post comment</button>
                                     </div>
                                 </div>
                             </div>
@@ -90,6 +85,9 @@
                                   </div>
                               </div>
                           </div>
+                          <hr>
+                          <form action="/locations/reviews/<%= data._id %>/<%= review._id %>?_method=DELETE" method="POST"><button class="btn btn-sm btn-danger">Delete</button></form>
+                        </form>
                       </div>
                     <div class="card-footer text-muted">
                         <p>Created 2 days ago</p> 
