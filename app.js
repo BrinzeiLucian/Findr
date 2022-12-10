@@ -40,7 +40,6 @@ main().catch(err => console.log(err));
 
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/FindrDB');
-  // use `await mongoose.connect('mongodb://user:password@localhost:27017/test');` if your database has auth enabled
 };
 
 let db = mongoose.connection;
@@ -148,7 +147,7 @@ app.get('/locations/:id', wrapAsync (async (req, res, next) => {
 app.delete('/locations/reviews/:id/:reviewId', wrapAsync(async(req, res) => {
     const { id, reviewId } = req.params;
     await FindrLocation.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
-    await Review.findByIdAndDelete(req.param.reviewId);
+    await Review.findByIdAndDelete(req.params.reviewId);
     res.redirect(`/locations/${id}`);
 }));
 
