@@ -147,7 +147,7 @@ app.get('/locations/:id', wrapAsync (async (req, res, next) => {
 app.delete('/locations/reviews/:id/:reviewId', wrapAsync(async(req, res) => {
     const { id, reviewId } = req.params;
     await FindrLocation.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
-    await Review.findByIdAndDelete(req.params.reviewId);
+    await Review.findByIdAndDelete(reviewId);
     res.redirect(`/locations/${id}`);
 }));
 
