@@ -31,6 +31,7 @@ const wrapAsync = require('./factory/wrapAsync');
 const Joi = require('joi');
 const { validationLocationsSchemaJOI, reviewSchemaJOI } = require('./factory/validationSchemas.js');
 let Review = require('./models/reviewsModel');
+let reviewsRouter = require('./routes/reviews');
 
 //set local server PORT
 let port = 8080;
@@ -53,6 +54,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
+app.use('/locations/reviews', reviewsRouter);
 
 //serving static files
 app.use(express.static(path.join(__dirname, 'customs')));
@@ -74,16 +76,6 @@ let validateLocations = (req, res, next) => {
         next();
     };
 };
-
-let validateReviews = (req, res, next) => {
-    let { error } = reviewSchemaJOI.validate(req.body);
-    if(error){
-        let msg = error.details.map(el => el.message).join(`,`);
-        throw new AppError(msg, 400);
-    } else{
-        next();
-    };
-}
 
 //auth function
 let verifyPassword = (req, res, next) => {
@@ -141,25 +133,6 @@ app.get('/locations/:id', wrapAsync (async (req, res, next) => {
     console.log(data);
         if(!data){throw new AppError('Location not found !', 404);};
     res.render('locations/show', { pageName: `Location page`, data });
-}));
-
-//reviews delete
-app.delete('/locations/reviews/:id/:reviewId', wrapAsync(async(req, res) => {
-    const { id, reviewId } = req.params;
-    await FindrLocation.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/locations/${id}`);
-}));
-
-//reviews
-app.post('/locations/reviews/:id', validateReviews, wrapAsync(async(req, res) => {
-    let post = await FindrLocation.findById(req.params.id);
-    let review = new Review(req.body.review);
-    post.reviews.push(review);
-    await review.save();
-    await post.save();
-    console.log(req.body.review);
-    res.redirect(`/locations/${post._id}`);
 }));
 
 //all locations
