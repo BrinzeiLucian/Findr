@@ -8,7 +8,7 @@ let FindrLocation = require('../models/dbFindrModel');
 const AppError = require('../factory/AppError');
 const wrapAsync = require('../factory/wrapAsync');
 const Joi = require('joi');
-const { validationLocationsSchemaJOI, reviewSchemaJOI } = require('../factory/validationSchemas.js');
+const { reviewSchemaJOI } = require('../factory/validationSchemas.js');
 let Review = require('../models/reviewsModel');
 let router = express.Router();
 

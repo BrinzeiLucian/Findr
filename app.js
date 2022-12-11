@@ -29,7 +29,7 @@ let axios = require('axios');
 const AppError = require('./factory/AppError');
 const wrapAsync = require('./factory/wrapAsync');
 const Joi = require('joi');
-const { validationLocationsSchemaJOI, reviewSchemaJOI } = require('./factory/validationSchemas.js');
+let { validationLocationsSchemaJOI } = require('./factory/validationSchemas.js');
 let Review = require('./models/reviewsModel');
 let reviewsRouter = require('./routes/reviews');
 
@@ -58,6 +58,8 @@ app.use('/locations/reviews', reviewsRouter);
 
 //serving static files
 app.use(express.static(path.join(__dirname, 'customs')));
+app.use(express.static(path.join(__dirname, 'factory')));
+
 
 //ejs setup (instead of require)
 app.engine('ejs', ejsmate);

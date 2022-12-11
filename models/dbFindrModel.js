@@ -7,28 +7,28 @@ let Review = require('./reviewsModel');
 let dbFindrSchema = new Schema ({
     title: {
         type: String,
-        require
+        require,
         },
     image: {
         type: String,
-        require
+        require,
     },
     location: {
         type: String,
-        require
+        require,
     },
     description: {
         type: String,
-        require
+        require,
     },
     phone: {
-        type: String
+        type: String,
     },
     website: {
-        type: String
+        type: String,
     },
     email: {
-        type: String
+        type: String,
     },
     reviews: [
         {
