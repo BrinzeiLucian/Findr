@@ -23,12 +23,15 @@ let dbFindrSchema = new Schema ({
     },
     phone: {
         type: String,
+        require,
     },
     website: {
         type: String,
+        require,
     },
     email: {
         type: String,
+        require,
     },
     reviews: [
         {
