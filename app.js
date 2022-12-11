@@ -89,7 +89,6 @@ let verifyPassword = (req, res, next) => {
 
 //secret route with auth
 app.get('/secret', verifyPassword, (req, res) => {
-    //console.log(`Logged in succesfully`);
     res.send(`Logged in succesfully`);
 });
 
