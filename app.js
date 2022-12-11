@@ -94,7 +94,7 @@ app.get('/secret', verifyPassword, (req, res) => {
 });
 
 //delete location
-app.delete('/locations/:id', wrapAsync (async ( req, res, next ) => {
+app.delete('/locations/:id/delete', wrapAsync (async ( req, res, next ) => {
     let { id } = req.params;
     await FindrLocation.findByIdAndDelete(id);
     res.redirect('/locations');
