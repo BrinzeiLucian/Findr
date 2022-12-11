@@ -23,17 +23,17 @@
                   <br>
                   <div class="form-group">
                     <label for="phone">Phone:</label>
-                    <input type="tel" class="form-control" id="phone" name="locations[phone]" placeholder="No provided data" pattern="[0-9]{4} [0-9]{3} [0-9]{3}" value="<%= updateData.phone %>">
+                    <input type="tel" class="form-control" id="phone" name="locations[phone]" placeholder="No provided data" pattern="[0-9]{4} [0-9]{3} [0-9]{3}" value="<%= updateData.phone %>" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="email">E-mail:</label>
-                    <input type="email" class="form-control" id="email" name="locations[email]" placeholder="No provided data" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" value="<%= updateData.email %>">
+                    <input type="email" class="form-control" id="email" name="locations[email]" placeholder="No provided data" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" value="<%= updateData.email %>" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="website">Website:</label>
-                    <input type="url" class="form-control" id="website" name="locations[website]" placeholder="No provided data" pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?" value="<%= updateData.website %>">
+                    <input type="url" class="form-control" id="website" name="locations[website]" placeholder="No provided data" pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?" value="<%= updateData.website %>" required>
                   </div>
                   <br>
                   <div class="form-group">
