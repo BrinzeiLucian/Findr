@@ -10,7 +10,6 @@ const wrapAsync = require('../factory/wrapAsync');
 const Joi = require('joi');
 const { validationLocationsSchemaJOI, reviewSchemaJOI } = require('../factory/validationSchemas.js');
 let Review = require('../models/reviewsModel');
-const { Router } = require('express');
 let router = express.Router();
 
 //functions
