@@ -13,8 +13,10 @@
  * npm install ejs-mate --save
  * npm i joi
 
- Install with:
+ Install with: <br/>
 **npm install**
+
+---
 
 **How to use the API**
 
@@ -23,13 +25,13 @@ Use **GET** method on each page's **URL**
 
 * Create **New** location post: <br/>
 Use **POST** method on **baseURL**/locations <br/>
-Add required data payload as shown:
+Add required data payload as shown: <br/>
 **locations[title]**
 
-* **Update** existing location post:
+* **Update** existing location post: <br/>
 Use **PUT** method on **baseURL**/locations/**id**
-Add required data payload as shown:
+Add required data payload as shown: <br/>
 **locations[title]**
 
-* **Delete** existing location post:
+* **Delete** existing location post: <br/>
 Use **Delete** method on **baseURL**/locations/**id**/delete
