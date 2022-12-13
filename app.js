@@ -18,6 +18,7 @@ const AppError = require('./factory/AppError');
 let reviewsRouter = require('./routes/reviews');
 let locationsRouter = require('./routes/locations');
 let adminRouter = require('./routes/admin');
+let rootRouter = require('./routes/root');
 
 //set local server PORT
 let port = 8080;
@@ -43,6 +44,7 @@ app.use(morgan('tiny'));
 app.use('/locations/reviews', reviewsRouter);
 app.use('/locations', locationsRouter);
 app.use('/admin', adminRouter);
+app.use(rootRouter);
 
 //serving static files
 app.use(express.static(path.join(__dirname, 'customs')));
@@ -57,20 +59,15 @@ app.set('views', [__dirname + '/', __dirname + '/views']);
 
 //---------------------------------//
 
-//root
-app.get('/', (req, res) => {
-    res.render('home', { pageName: 'Home'});
-});
-
-//redirect on incorrect path
-app.all('*', (req, res, next) => {
-    next(new AppError('Page Not found !', 404));
-});
-
 //handle cast error
 let handleCastErr = err => {
     return new AppError(`Incorrect id !`, 400);
 };
+
+//redirect on incorrect path
+app.all('*', (err, req, res, next) => {
+    next(new AppError('Page Not found !', 404));
+});
 
 app.use((err, req, res, next) => {
     if(err.name === 'CastError') err = handleCastErr(err);
