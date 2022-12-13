@@ -34,4 +34,4 @@ Add required data payload as shown: <br/>
 **locations[title]**
 
 * **Delete** existing location post: <br/>
-Use **Delete** method on **baseURL**/locations/**id**/delete
+Use **DELETE** method on **baseURL**/locations/**id**/delete
