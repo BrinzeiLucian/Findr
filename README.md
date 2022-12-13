@@ -29,7 +29,7 @@ Add required data payload as shown: <br/>
 **locations[title]**
 
 * **Update** existing location post: <br/>
-Use **PUT** method on **baseURL**/locations/**id**
+Use **PUT** method on **baseURL**/locations/**id** <br/>
 Add required data payload as shown: <br/>
 **locations[title]**
 
