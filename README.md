@@ -18,11 +18,11 @@
 
 **How to use the API**
 
-* Get **Status** of each page:
+* Get **Status** of each page: <br/>
 Use **GET** method on each page's **URL**
 
-* Create **New** location post:
-Use **POST** method on **baseURL**/locations
+* Create **New** location post: <br/>
+Use **POST** method on **baseURL**/locations <br/>
 Add required data payload as shown:
 **locations[title]**
 
