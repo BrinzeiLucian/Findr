@@ -1,19 +1,3 @@
-
-/** NPM required installs
- * npm init -y (for package json)
- * npm i express (install express)
- * npm i nodemon (for server restart -> local install) OR npm install -g nodemon (global install)
- * npm install axios
- * npm i ejs (install ejs for templating)
- * npm install --save-dev webpack (install webpack local)
- * npm install uuid
- * npm i method-override
- * npm i mongoose
- * npm install morgan
- * npm install ejs-mate --save
- * npm i joi
- */
-
 //requires
 const express = require('express');
 const app = express();
@@ -23,15 +7,17 @@ const { v4: uuid } = require('uuid');
 uuid();
 const methodOverride = require('method-override');
 let mongoose = require('mongoose');
-let FindrLocation = require('./models/dbFindrModel');
+//let FindrLocation = require('./models/dbFindrModel');
 let morgan = require('morgan');
-let axios = require('axios');
+//let axios = require('axios');
 const AppError = require('./factory/AppError');
-const wrapAsync = require('./factory/wrapAsync');
-const Joi = require('joi');
-let { validationLocationsSchemaJOI } = require('./factory/validationSchemas.js');
-let Review = require('./models/reviewsModel');
+//const wrapAsync = require('./factory/wrapAsync');
+//const Joi = require('joi');
+//let { validationLocationsSchemaJOI } = require('./factory/validationSchemas.js');
+//let Review = require('./models/reviewsModel');
 let reviewsRouter = require('./routes/reviews');
+let locationsRouter = require('./routes/locations');
+let adminRouter = require('./routes/admin');
 
 //set local server PORT
 let port = 8080;
@@ -55,6 +41,8 @@ app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
 app.use('/locations/reviews', reviewsRouter);
+app.use('/locations', locationsRouter);
+app.use('/admin', adminRouter);
 
 //serving static files
 app.use(express.static(path.join(__dirname, 'customs')));
@@ -69,85 +57,10 @@ app.set('views', [__dirname + '/', __dirname + '/views']);
 
 //---------------------------------//
 
-let validateLocations = (req, res, next) => {    
-    let { error } = validationLocationsSchemaJOI.validate(req.body);
-    if(error){
-        let msg = error.details.map(el => el.message).join(`,`);
-        throw new AppError(msg, 400);
-    } else{
-        next();
-    };
-};
-
-//auth function
-let verifyPassword = (req, res, next) => {
-    let { password } = req.query;
-    //http://localhost:8080/secret?password=Password
-    if(password === 'Password'){
-        next();
-    };
-    throw new AppError('Password required', 401);
-};
-
-//secret route with auth
-app.get('/secret', verifyPassword, (req, res) => {
-    res.send(`Logged in succesfully`);
-});
-
-//delete location
-app.delete('/locations/:id/delete', wrapAsync (async ( req, res, next ) => {
-    let { id } = req.params;
-    await FindrLocation.findByIdAndDelete(id);
-    res.redirect('/locations');
-}));
-
-//update location
-app.put('/locations/:id', validateLocations, wrapAsync (async (req, res, next) => {
-    let { id } = req.params;
-    let updateData = await FindrLocation.findByIdAndUpdate(id, { ...req.body.locations }, { runValidators: true, new: true } );
-    res.redirect(`/locations/${updateData._id}`);
-}));
-
-//edit locations
-app.get('/locations/edit/:id', wrapAsync (async (req, res, next) => {
-    let updateData = await FindrLocation.findById(req.params.id)
-        if(!updateData){
-            throw new AppError('Location not found !', 404);
-        };
-    res.render('locations/edit', { pageName: `Edit`, updateData });
-}));
-
-//new location
-app.get('/locations/new', (req, res) => {
-    res.render('locations/new', {pageName: 'New Location'});
-});
-
-app.post('/locations', validateLocations, wrapAsync (async (req, res, next) => {
-    let newLocation = FindrLocation(req.body.locations);
-    await newLocation.save();
-    res.redirect(`locations/${newLocation._id}`);
-}));
-
-//location id
-app.get('/locations/:id', wrapAsync (async (req, res, next) => {
-    let data = await FindrLocation.findById(req.params.id).populate('reviews');
-    console.log(data);
-        if(!data){throw new AppError('Location not found !', 404);};
-    res.render('locations/show', { pageName: `Location page`, data });
-}));
-
-//all locations
-app.get('/locations', wrapAsync (async (req, res, next) => {
-        let Findr = await FindrLocation.find({});
-        res.render('locations/index', { pageName: 'Findr Locations', Findr });
-}));
-
-//root homepage
+//root
 app.get('/', (req, res) => {
     res.render('home', { pageName: 'Home'});
 });
-
-//---------------------------------//
 
 //redirect on incorrect path
 app.all('*', (req, res, next) => {
