@@ -65,7 +65,7 @@ let handleCastErr = err => {
 };
 
 //redirect on incorrect path
-app.all('*', (err, req, res, next) => {
+app.all('*', (req, res, next) => {
     next(new AppError('Page Not found !', 404));
 });
 

@@ -14,4 +14,22 @@
  * npm i joi
 
  Install with:
- <npm install>
+<npm install>
+
+<How to use the API>
+
+* Get <Status> of each page:
+Use <GET> method on each page's <URL>
+
+* Create <New> location post:
+Use <POST> method on <baseURL>/locations
+Add required data payload as shown:
+<locations[title]>
+
+* <Update> existing location post:
+Use <PUT> method on <baseURL>/locations/<id>
+Add required data payload as shown:
+<locations[title]>
+
+* <Delete> existing location post:
+Use <Delete> method on <baseURL>/locations/<id>/delete
