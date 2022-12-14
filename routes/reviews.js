@@ -19,6 +19,25 @@ let validateReviews = (req, res, next) => {
 };
 
 //routes
+
+//reviews update
+router.put('/:id/:reviewId/edit', validateReviews, wrapAsync(async(req, res) => {
+    let { id, reviewId } = req.params;
+    await Review.findByIdAndUpdate(reviewId, { ...req.body.reviewData }, { runValidators: true, new: true });
+    res.redirect(`/locations/${id}`);
+}));
+
+//edit reviews page
+router.get('/:id/:reviewId/edit', wrapAsync (async (req, res, next) => {
+    let idData = await FindrLocation.findById(req.params.id);
+    let reviewData = await Review.findById(req.params.reviewId);
+        if(!reviewData){
+            throw new AppError('Location not found !', 404);
+        };
+    res.render('reviews/edit', { pageName: `Edit Reviews`, idData, reviewData });
+}));
+
+
 //reviews delete
 router.delete('/:id/:reviewId/delete', wrapAsync(async(req, res) => {
     const { id, reviewId } = req.params;

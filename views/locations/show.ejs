@@ -87,7 +87,10 @@
                               </div>
                           </div>
                           <hr>
+                          <div class="d-grid gap-3 d-md-flex justify-content-md-left mb-2">
+                          <a href="/locations/reviews/<%= data._id %>/<%= review._id %>/edit" type="button" class="btn btn-sm btn-info">Edit</a>
                           <form action="/locations/reviews/<%= data._id %>/<%= review._id %>/delete?_method=DELETE" method="POST"><button class="btn btn-sm btn-danger">Delete</button></form>
+                          </div>
                         </form>
                       </div>
                     <div class="card-footer text-muted">
