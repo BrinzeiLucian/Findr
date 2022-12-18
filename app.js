@@ -1,6 +1,7 @@
 //requires
 const express = require('express');
 const app = express();
+const flash = require('connect-flash');
 let ejsmate = require('ejs-mate');
 const path = require('path');
 const { v4: uuid } = require('uuid');
@@ -22,7 +23,6 @@ let rootRouter = require('./routes/root');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let sessionOptions = { secret: 'secret', resave: false, saveUninitialized: false};
-const flash = require('connect-flash');
 
 //set local server PORT
 let port = 8080;

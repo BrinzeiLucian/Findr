@@ -8,37 +8,37 @@
                   <br>
                   <div class="form-group">
                     <label for="title">Name:</label>
-                    <input type="text" class="form-control" id="title" name="locations[title]" required placeholder="No provided data" value="<%= updateData.title %>" required>
+                    <input type="text" class="form-control" id="title" name="locations[title]" required placeholder="Enter new name" value="<%= updateData.title %>" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="adress">Adress:</label>
-                    <input type="text" class="form-control" id="adress" name="locations[location]" required placeholder="No provided data" value="<%= updateData.location %>" required>
+                    <input type="text" class="form-control" id="adress" name="locations[location]" required placeholder="Enter new adress" value="<%= updateData.location %>" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea type="text" class="form-control" id="description" name="locations[description]" minlength="5" required placeholder="No provided data" required><%= updateData.description %></textarea>
+                    <textarea type="text" class="form-control" id="description" name="locations[description]" minlength="5" required placeholder="Enter new description" required><%= updateData.description %></textarea>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="phone">Phone:</label>
-                    <input type="tel" class="form-control" id="phone" name="locations[phone]" placeholder="No provided data" pattern="[0-9]{4} [0-9]{3} [0-9]{3}" value="<%= updateData.phone %>" required>
+                    <input type="tel" class="form-control" id="phone" name="locations[phone]" placeholder="Enter new phone number" pattern="[0-9]{4} [0-9]{3} [0-9]{3}" value="<%= updateData.phone %>" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="email">E-mail:</label>
-                    <input type="email" class="form-control" id="email" name="locations[email]" placeholder="No provided data" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" value="<%= updateData.email %>" required>
+                    <input type="email" class="form-control" id="email" name="locations[email]" placeholder="Enter new email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" value="<%= updateData.email %>" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="website">Website:</label>
-                    <input type="url" class="form-control" id="website" name="locations[website]" placeholder="No provided data" pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?" value="<%= updateData.website %>" required>
+                    <input type="url" class="form-control" id="website" name="locations[website]" placeholder="Enter new website" pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?" value="<%= updateData.website %>" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="image">Image URL:</label>
-                    <input type="url" class="form-control" id="image" name="locations[image]" placeholder="No provided data" pattern="https://.*" value="<%= updateData.image %>" required>
+                    <input type="url" class="form-control" id="image" name="locations[image]" placeholder="Enter new image URL" pattern="https://.*" value="<%= updateData.image %>" required>
                   </div>
                   <br>
                   <button type="submit" class="btn btn-info">Update</button>
