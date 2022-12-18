@@ -11,7 +11,9 @@
  * npm i mongoose
  * npm install morgan
  * npm install ejs-mate --save
- * npm i joi
+ * npm i joi (schema validator)
+ * npm install cookie-parser (Parse Cookie header and populate **req.cookies** with an object keyed by the cookie names)
+ * npm install express-session
 
  Install with: <br/>
 **npm install**
