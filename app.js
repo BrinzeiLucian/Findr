@@ -1,7 +1,7 @@
 //requires
 const express = require('express');
-const app = express();
 const flash = require('connect-flash');
+const app = express();
 let ejsmate = require('ejs-mate');
 const path = require('path');
 const { v4: uuid } = require('uuid');
