@@ -5,7 +5,7 @@ const AppError = require('../factory/AppError');
 const wrapAsync = require('../factory/wrapAsync');
 const { reviewSchemaJOI } = require('../factory/validationSchemas.js');
 let Review = require('../models/reviewsModel');
-let router = express.Router();
+let router = express.Router({mergeParams: true});
 
 //functions
 let validateReviews = (req, res, next) => {

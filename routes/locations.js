@@ -5,7 +5,7 @@ let FindrLocation = require('../models/dbFindrModel');
 const AppError = require('../factory/AppError');
 const wrapAsync = require('../factory/wrapAsync');
 const { validationLocationsSchemaJOI } = require('../factory/validationSchemas.js');
-let router = express.Router();
+let router = express.Router({mergeParams: true});
 
 //functions
 let validateLocations = (req, res, next) => {    
