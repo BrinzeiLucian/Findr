@@ -54,8 +54,7 @@ app.use(session(sessionOptions));
 app.use(flash());
 
 //serving static files
-app.use(express.static(path.join(__dirname, 'customs')));
-app.use(express.static(path.join(__dirname, 'factory')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //ejs setup (instead of require)
 app.engine('ejs', ejsmate);
