@@ -14,5 +14,3 @@ form.classList.add('was-validated')
 }, false)
 })
 })();
-
-//alert('hi');
