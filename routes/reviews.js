@@ -24,6 +24,7 @@ let validateReviews = (req, res, next) => {
 router.put('/:id/:reviewId/edit', validateReviews, wrapAsync(async(req, res) => {
     let { id, reviewId } = req.params;
     await Review.findByIdAndUpdate(reviewId, { ...req.body.reviewData }, { runValidators: true, new: true });
+    req.flash('success', 'Review successfully edited !');
     res.redirect(`/locations/${id}`);
 }));
 
@@ -43,6 +44,7 @@ router.delete('/:id/:reviewId/delete', wrapAsync(async(req, res) => {
     const { id, reviewId } = req.params;
     await FindrLocation.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
     await Review.findByIdAndDelete(reviewId);
+    req.flash('success', 'Review successfully deleted !');
     res.redirect(`/locations/${id}`);
 }));
 
@@ -53,7 +55,8 @@ router.post('/:id', validateReviews, wrapAsync(async(req, res) => {
     post.reviews.push(review);
     await review.save();
     await post.save();
-    console.log(req.body.review);
+    //console.log(req.body.review);
+    req.flash('success', 'Review successfully created !');
     res.redirect(`/locations/${post._id}`);
 }));
 
