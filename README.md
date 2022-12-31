@@ -15,6 +15,7 @@
  * npm install cookie-parser (Parse Cookie header and populate **req.cookies** with an object keyed by the cookie names)
  * npm install express-session
  * npm install connect-flash
+ * npm i bcrypt
 
  Install with: <br/>
 **npm install**

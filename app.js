@@ -22,6 +22,7 @@ let adminRouter = require('./routes/admin');
 let rootRouter = require('./routes/root');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
+let bcrypt = require('bcrypt');
 
 //set local server PORT
 let port = 8080;
