@@ -4,13 +4,13 @@ let Schema = mongoose.Schema;
 let reviewSchema = new Schema({
     comment: {
         type: String,
-        require
+        required: true
     },
     rating:{
         type: Number,
         min: '1',
         max: '5',
-        require
+        required: true
     }
 });
 

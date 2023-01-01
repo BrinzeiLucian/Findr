@@ -16,6 +16,7 @@
  * npm install express-session
  * npm install connect-flash
  * npm i bcrypt
+ * npm i passport passport-local passport-local-mongoose
 
  Install with: <br/>
 **npm install**

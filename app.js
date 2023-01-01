@@ -2,27 +2,23 @@
 const express = require('express');
 const flash = require('connect-flash');
 const app = express();
-let ejsmate = require('ejs-mate');
+const ejsmate = require('ejs-mate');
 const path = require('path');
 const { v4: uuid } = require('uuid');
 uuid();
 const methodOverride = require('method-override');
-let mongoose = require('mongoose');
-let morgan = require('morgan');
-//let FindrLocation = require('./models/dbFindrModel');
-//let axios = require('axios');
-//const wrapAsync = require('./factory/wrapAsync');
-//const Joi = require('joi');
-//let { validationLocationsSchemaJOI } = require('./factory/validationSchemas.js');
-//let Review = require('./models/reviewsModel');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
 const AppError = require('./factory/AppError');
-let reviewsRouter = require('./routes/reviews');
-let locationsRouter = require('./routes/locations');
-let adminRouter = require('./routes/admin');
-let rootRouter = require('./routes/root');
-let cookieParser = require('cookie-parser');
-let session = require('express-session');
-let bcrypt = require('bcrypt');
+const reviewsRouter = require('./routes/reviews');
+const locationsRouter = require('./routes/locations');
+const adminRouter = require('./routes/admin');
+const rootRouter = require('./routes/root');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('passport-local');
+const User = require('./models/User');
 
 //set local server PORT
 let port = 8080;
@@ -66,6 +62,13 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 });
+
+//passport for auth and session persist
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new passportLocal(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //route handlers
 app.use('/locations/reviews', reviewsRouter);
@@ -122,6 +125,16 @@ app.get('/register', (req, res) => {
     const { username = 'Unknown' } = req.query;
     req.session.username = username;
     res.redirect('/viewcount');
+});
+
+app.get('/createUser', async (req, res) => {
+    const user = new User({
+        email: 'mail@mail.com',
+        username: 'user'
+
+    });
+    let newUser = await User.register(user, 'password');
+    res.send(newUser);
 });
 
 //---------------------------------//
