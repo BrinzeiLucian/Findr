@@ -76,7 +76,7 @@ app.use('/locations/reviews', reviewsRouter);
 app.use('/locations', locationsRouter);
 app.use('/admin', adminRouter);
 app.use(rootRouter);
-app.use('/users', authRouter);
+app.use('/', authRouter);
 
 //serving static files
 app.use(express.static(path.join(__dirname, 'public')));
