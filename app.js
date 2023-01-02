@@ -56,20 +56,21 @@ let sessionOptions = {
 };
 app.use(session(sessionOptions));
 
-//flash
-app.use(flash());
-app.use((req, res, next) => {
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
-    next();
-});
-
 //passport for auth and session persist
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+//flash
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 //route handlers
 app.use('/locations/reviews', reviewsRouter);
