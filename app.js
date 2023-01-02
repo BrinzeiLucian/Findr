@@ -19,6 +19,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
 const User = require('./models/User');
+const authRouter = require('./routes/auth');
 
 //set local server PORT
 let port = 8080;
@@ -75,6 +76,7 @@ app.use('/locations/reviews', reviewsRouter);
 app.use('/locations', locationsRouter);
 app.use('/admin', adminRouter);
 app.use(rootRouter);
+app.use('/users', authRouter);
 
 //serving static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -84,58 +86,6 @@ app.engine('ejs', ejsmate);
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', [__dirname + '/', __dirname + '/views']);
-
-//---------------------------------//
-
-app.get('/setcookies',(req, res) => {
-    res.cookie('user', 'TestUser');
-    res.cookie('password', 'TestPassword');
-    res.send('Sent cookies');
-});
-
-app.get('/getcookies', (req, res) => {
-    let { user = 'default'} = req.cookies;
-    let { password = 'default'} = req.cookies;
-    res.send(`${user} <br> ${password}`);
-});
-
-app.get('/setsignedcookies', (req, res) => {
-    res.cookie('admin', 'admin', {signed: true});
-    res.cookie('adminPassword', 'adminPassword', {signed: true});
-    res.send(`signed cookies`);
-});
-
-app.get('/getsignedcookies', (req, res) => {
-    let { admin = 'invalid'} = req.signedCookies;
-    let { adminPassword = 'invalid'} = req.signedCookies;
-    res.send(`${admin} <br> ${adminPassword}`);
-});
-
-app.get('/viewcount', (req, res) => {
-    let { username } = req.session;
-    if(req.session.count){
-        req.session.count += 1;
-    } else {
-        req.session.count = 1;
-    };
-    res.send(`${username} you visited the page ${req.session.count} times`);
-});
-
-app.get('/register', (req, res) => {
-    const { username = 'Unknown' } = req.query;
-    req.session.username = username;
-    res.redirect('/viewcount');
-});
-
-app.get('/createUser', async (req, res) => {
-    const user = new User({
-        email: 'mail@mail.com',
-        username: 'user'
-
-    });
-    let newUser = await User.register(user, 'password');
-    res.send(newUser);
-});
 
 //---------------------------------//
 
