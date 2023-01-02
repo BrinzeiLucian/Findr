@@ -1,7 +1,7 @@
 //imports
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-let Review = require('./reviewsModel');
+let Review = require('./Review');
 
 //database schema
 let dbFindrSchema = new Schema ({
@@ -22,16 +22,13 @@ let dbFindrSchema = new Schema ({
         required: true
     },
     phone: {
-        type: String,
-        required: true
+        type: String
     },
     website: {
-        type: String,
-        required: true
+        type: String
     },
     email: {
-        type: String,
-        required: true
+        type: String
     },
     reviews: [
         {

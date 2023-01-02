@@ -4,7 +4,7 @@ let FindrLocation = require('../models/dbFindrModel');
 const AppError = require('../factory/AppError');
 const wrapAsync = require('../factory/wrapAsync');
 const { reviewSchemaJOI } = require('../factory/validationSchemas.js');
-let Review = require('../models/reviewsModel');
+let Review = require('../models/Review');
 let router = express.Router({mergeParams: true});
 
 //functions
