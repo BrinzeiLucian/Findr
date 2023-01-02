@@ -4,7 +4,6 @@ let router = express.Router();
 const User = require('../models/User');
 const wrapAsync = require('../factory/wrapAsync');
 const passport = require('passport');
-const { isLoggedIn } = require('../factory/middleware');
 
 //routes
 router.get('/register', (req, res) => {
@@ -25,13 +24,32 @@ router.post('/register', wrapAsync(async(req, res) => {
 }));
 
 router.get('/login', (req, res) => {
+    if(!req.isAuthenticated()){
     res.render('auth/login', { pageName: 'User login'});
+    } else {
+        req.flash('error', 'You are already signed in !');
+        return res.redirect('/locations');
+    }
 });
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Welcome back !');
     res.redirect('/locations');
 });
+
+router.get('/logout', (req, res, next) => {
+    if(!req.isAuthenticated()){
+        req.flash('error', 'You must be signed in !');
+        return res.redirect('/login');
+    }
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', 'Logged out successfully !');
+      res.redirect('/locations');
+    });
+  });
 
 //export
 module.exports = router;
