@@ -6,6 +6,7 @@ const wrapAsync = require('../factory/wrapAsync');
 const { reviewSchemaJOI } = require('../factory/validationSchemas.js');
 let Review = require('../models/Review');
 let router = express.Router({mergeParams: true});
+const { isLoggedIn } = require('../factory/middleware');
 
 //functions
 let validateReviews = (req, res, next) => {
@@ -19,9 +20,8 @@ let validateReviews = (req, res, next) => {
 };
 
 //routes
-
 //reviews update
-router.put('/:id/:reviewId/edit', validateReviews, wrapAsync(async(req, res) => {
+router.put('/:id/:reviewId/edit', isLoggedIn, validateReviews, wrapAsync(async(req, res) => {
     let { id, reviewId } = req.params;
     await Review.findByIdAndUpdate(reviewId, { ...req.body.reviewData }, { runValidators: true, new: true });
     req.flash('success', 'Review successfully edited !');
@@ -29,7 +29,7 @@ router.put('/:id/:reviewId/edit', validateReviews, wrapAsync(async(req, res) => 
 }));
 
 //edit reviews page
-router.get('/:id/:reviewId/edit', wrapAsync (async (req, res, next) => {
+router.get('/:id/:reviewId/edit', isLoggedIn, wrapAsync (async (req, res, next) => {
     let idData = await FindrLocation.findById(req.params.id);
     let reviewData = await Review.findById(req.params.reviewId);
         if(!reviewData){
@@ -38,9 +38,8 @@ router.get('/:id/:reviewId/edit', wrapAsync (async (req, res, next) => {
     res.render('reviews/edit', { pageName: `Edit Reviews`, idData, reviewData });
 }));
 
-
 //reviews delete
-router.delete('/:id/:reviewId/delete', wrapAsync(async(req, res) => {
+router.delete('/:id/:reviewId/delete', isLoggedIn, wrapAsync(async(req, res) => {
     const { id, reviewId } = req.params;
     await FindrLocation.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
     await Review.findByIdAndDelete(reviewId);
@@ -49,13 +48,12 @@ router.delete('/:id/:reviewId/delete', wrapAsync(async(req, res) => {
 }));
 
 //reviews
-router.post('/:id', validateReviews, wrapAsync(async(req, res) => {
+router.post('/:id', isLoggedIn, validateReviews, wrapAsync(async(req, res) => {
     let post = await FindrLocation.findById(req.params.id);
     let review = new Review(req.body.review);
     post.reviews.push(review);
     await review.save();
     await post.save();
-    //console.log(req.body.review);
     req.flash('success', 'Review successfully created !');
     res.redirect(`/locations/${post._id}`);
 }));

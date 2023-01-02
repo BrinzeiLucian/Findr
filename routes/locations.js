@@ -21,7 +21,7 @@ let validateLocations = (req, res, next) => {
 
 //routes
 //delete location
-router.delete('/:id/delete', wrapAsync (async ( req, res, next ) => {
+router.delete('/:id/delete', isLoggedIn, wrapAsync (async ( req, res, next ) => {
     let { id } = req.params;
     await FindrLocation.findByIdAndDelete(id);
     req.flash('success', 'Successfully deleted post !');
@@ -29,7 +29,7 @@ router.delete('/:id/delete', wrapAsync (async ( req, res, next ) => {
 }));
 
 //update location
-router.put('/:id', validateLocations, wrapAsync (async (req, res, next) => {
+router.put('/:id', validateLocations, isLoggedIn, wrapAsync (async (req, res, next) => {
     let { id } = req.params;
     let updateData = await FindrLocation.findByIdAndUpdate(id, { ...req.body.locations }, { runValidators: true, new: true } );
     req.flash('success', 'Successfully edited post !');
@@ -37,7 +37,7 @@ router.put('/:id', validateLocations, wrapAsync (async (req, res, next) => {
 }));
 
 //edit locations
-router.get('/edit/:id', wrapAsync (async (req, res, next) => {
+router.get('/edit/:id', isLoggedIn, wrapAsync (async (req, res, next) => {
     let updateData = await FindrLocation.findById(req.params.id)
     //if(!updateData){throw new AppError('Location not found !', 404);};
     if(!updateData){
@@ -60,7 +60,7 @@ router.post('/', validateLocations, isLoggedIn, wrapAsync (async (req, res, next
 }));
 
 //location id
-router.get('/:id', wrapAsync (async (req, res, next) => {
+router.get('/:id', isLoggedIn, wrapAsync (async (req, res, next) => {
     let data = await FindrLocation.findById(req.params.id).populate('reviews');
     //console.log(data);
     //if(!data){throw new AppError('Location not found !', 404);};
