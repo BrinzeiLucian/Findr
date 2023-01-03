@@ -36,6 +36,8 @@ let dbFindrSchema = new Schema ({
             ref: 'Review'
         }
     ]
+},{
+    timestamps: true,
 });
 
 //delete post reviews middleware

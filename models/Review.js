@@ -12,6 +12,8 @@ let reviewSchema = new Schema({
         max: '5',
         required: true
     }
+},{
+    timestamps: true,
 });
 
 module.exports = mongoose.model('Review', reviewSchema);

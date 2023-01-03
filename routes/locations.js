@@ -61,8 +61,7 @@ router.post('/', validateLocations, isLoggedIn, wrapAsync (async (req, res, next
 
 //location id
 router.get('/:id', isLoggedIn, wrapAsync (async (req, res, next) => {
-    let data = await FindrLocation.findById(req.params.id).populate('reviews');
-    //console.log(data);
+    let data = await FindrLocation.findById(req.params.id).populate('reviews').populate('author');
     //if(!data){throw new AppError('Location not found !', 404);};
     if(!data){
         req.flash('error', 'Post id not found !');
