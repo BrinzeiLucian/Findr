@@ -32,7 +32,7 @@ router.get('/login', (req, res) => {
     if(!req.isAuthenticated()){
     res.render('auth/login', { pageName: 'User login'});
     } else {
-        req.flash('error', 'You are already signed in !');
+        req.flash('success', 'Welcome back !');
         return res.redirect('/locations');
     }
 });
@@ -40,7 +40,6 @@ router.get('/login', (req, res) => {
 router.post('/renderLogin', (req, res) => {
     if(req.query.returnTo){
         req.session.returnTo = req.query.returnTo;
-
     }
 });
 

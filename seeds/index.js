@@ -42,7 +42,7 @@ let lorem = new LoremIpsum({
 
 const seedDB = async () => {
     await Findr.deleteMany({});
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
         
         const placeSeed = Math.floor(Math.random() * places.length);
         const descriptorsSeed = Math.floor(Math.random() * descriptors.length);
@@ -51,10 +51,14 @@ const seedDB = async () => {
       //let priceRatingRandomizer = Math.floor(Math.random() * 5) + 1;
 
         const db = new Findr({
+            author: '63b4411e19be3385824ce127',
             title: `${descriptors[descriptorsSeed]} ${places[placeSeed]}`,
             location: `${cities[citySeed].city}, ${cities[citySeed].state}`,
             description: lorem.generateParagraphs(2),
-            image: await seedImg()
+            image: await seedImg(),
+            phone: '0777 777 777',
+            website: 'https://www.SeedTestData.com/',
+            email: 'seedtestdata@mail.com'
         })
         await db.save();
     }

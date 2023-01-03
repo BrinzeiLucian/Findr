@@ -5,21 +5,21 @@ let Review = require('./Review');
 
 //database schema
 let dbFindrSchema = new Schema ({
+    author:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     title: {
-        type: String,
-        required: true
+        type: String
         },
     image: {
-        type: String,
-        required: true
+        type: String
     },
     location: {
-        type: String,
-        required: true
+        type: String
     },
     description: {
-        type: String,
-        required: true
+        type: String
     },
     phone: {
         type: String
