@@ -54,13 +54,14 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 router.post('/', validateLocations, isLoggedIn, wrapAsync (async (req, res, next) => {
     let newLocation = FindrLocation(req.body.locations);
+    newLocation.author = req.user._id;
     await newLocation.save();
     req.flash('success', 'Successfully created post !');
     res.redirect(`locations/${newLocation._id}`);
 }));
 
 //location id
-router.get('/:id', isLoggedIn, wrapAsync (async (req, res, next) => {
+router.get('/:id', isLoggedIn, wrapAsync (async (req, res) => {
     let data = await FindrLocation.findById(req.params.id).populate('reviews').populate('author');
     //if(!data){throw new AppError('Location not found !', 404);};
     if(!data){
