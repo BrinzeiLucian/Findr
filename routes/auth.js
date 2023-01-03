@@ -4,19 +4,24 @@ let router = express.Router();
 const User = require('../models/User');
 const wrapAsync = require('../factory/wrapAsync');
 const passport = require('passport');
+const { session } = require('passport');
+const { checkReturnTo } = require('../factory/middleware');
 
 //routes
 router.get('/register', (req, res) => {
     res.render('auth/register', { pageName: 'User Registration'});
 });
 
-router.post('/register', wrapAsync(async(req, res) => {
+router.post('/register', wrapAsync(async(req, res, next) => {
     try{
     const { email, username, password } = req.body;
     const user = new User({ email, username });
-    await User.register(user, password);
+    const registeredUser = await User.register(user, password);
+    req.login(registeredUser, err => {
+    if(err){return next(err);}
     req.flash('success', 'Registered successfully !');
-    res.redirect('/locations');
+    res.redirect('/locations');        
+    });
     } catch(e){
         req.flash("error", `${e.message}.`, "Please try again!");
         res.redirect("/register");
@@ -32,9 +37,17 @@ router.get('/login', (req, res) => {
     }
 });
 
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+router.post('/renderLogin', (req, res) => {
+    if(req.query.returnTo){
+        req.session.returnTo = req.query.returnTo;
+
+    }
+});
+
+router.post('/login', checkReturnTo, passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Welcome back !');
-    res.redirect('/locations');
+    const returnToUrl = res.locals.returnTo || '/locations';
+    res.redirect(returnToUrl);
 });
 
 router.get('/logout', (req, res, next) => {
@@ -49,7 +62,7 @@ router.get('/logout', (req, res, next) => {
       req.flash('success', 'Logged out successfully !');
       res.redirect('/locations');
     });
-  });
+});
 
 //export
 module.exports = router;
