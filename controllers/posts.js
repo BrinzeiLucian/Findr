@@ -6,7 +6,6 @@ const AppError = require('../factory/AppError');
 const wrapAsync = require('../factory/wrapAsync');
 const router = express.Router({mergeParams: true});
 const { isLoggedIn, validateLocations } = require('../factory/middleware');
-const posts = require('../controllers/posts');
 
 //controllers
 module.exports.index = async (req, res, next) => {

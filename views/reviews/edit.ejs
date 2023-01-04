@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-center">
           <div class="col-6">
             <h2>Edit rating and review</h2>
-            <form action="/reviews/<%= idData._id %>/<%= reviewData._id %>/edit" method="PUT" class="mb-3 validate-form" novalidate>
+            <form class="validate-form" action="/locations/reviews/<%= idData._id %>/<%= reviewData._id %>/edit?_method=PUT" method="POST" novalidate>
               <div class="card">
                 <div class="row">
                     <div class="col-2">
@@ -11,14 +11,14 @@
                     <div class="col-10">
                         <div class="comment-box ml-2">
                             <br>
-                            <label for="rating"><b>Username</b></label>
+                            <label for="rating"><%= reviewData.author.username %></label>
                             <hr>
                             <div class="rating" name="review[rating]" id="rating">
                                 <input type="radio" name="review[rating]" value="5" id="5"><label for="5">☆</label>
                                 <input type="radio" name="review[rating]" value="4" id="4"><label for="4">☆</label> 
                                 <input type="radio" name="review[rating]" value="3" id="3"><label for="3">☆</label>
                                 <input type="radio" name="review[rating]" value="2" id="2"><label for="2">☆</label>
-                                <input type="radio" name="review[rating]" value="1" id="1" <%= reviewData.rating %> required="required"/><label for="1">☆</label>
+                                <input type="radio" name="review[rating]" value="1" id="1" required="required"/><label for="1">☆</label>
                             </div>
                             <div class="comment-area">
                                 <textarea class="form-control" name="review[comment]" id="comment" cols="30" rows="4" required="required" placeholder="Add a comment..."><%= reviewData.comment %></textarea>
@@ -27,10 +27,10 @@
                                 <div class="row">
                                     <div class="m-1 p-1">
                                         <div class="pull-left">
-                                        <button class="btn btn-info">Edit review</button>
-                                        <a href="/locations/<%= idData._id %>">
-                                            <input type="button" class="btn btn-danger" value="Cancel"/>
-                                         </a>
+                                        <button type="submit" class="btn btn-info">Edit review</button>
+                                            <a href="/locations/<%= idData._id %>">
+                                                <input type="button" class="btn btn-danger" value="Cancel"/>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
