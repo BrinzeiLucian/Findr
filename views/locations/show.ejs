@@ -30,7 +30,9 @@
             <% } %> 
         </div>
     </div>
+    <!--review form-->
     <div class="col-6">
+        <% if(currentUser){ %> 
         <form action="/locations/reviews/<%= data._id %>" method="POST" class="mb-3 validate-form" novalidate>
           <div class="card">
             <div class="row">
@@ -67,6 +69,7 @@
             </div>
         </div>            
       </form>
+      <% } %>
       <!--DISPLAYED REVIEWS-->
       <% for(let review of data.reviews ) { %>
           <div class="mb-3">
@@ -77,7 +80,7 @@
                       </div>
                       <div class="col-10">
                           <div class="comment-box ml-2">
-                              <label for="rating">Username</label>
+                              <label for="rating"><%= review.author.username %></label>
                               <br>
                               <div class="rating" name="review[rating]" id="rating">
                                   <input type="radio" name="review[rating]" value="1" id="1" required="required"/><label for="1"><%= review.rating %></label>
@@ -89,11 +92,13 @@
                                   </div>
                               </div>
                           </div>
+                          <% if(currentUser && review.author.equals(currentUser._id)){ %> 
                           <hr>
                           <div class="d-grid gap-3 d-md-flex justify-content-md-left mb-2">
                           <a href="/locations/reviews/<%= data._id %>/<%= review._id %>/edit" type="button" class="btn btn-sm btn-info">Edit</a>
                           <form action="/locations/reviews/<%= data._id %>/<%= review._id %>/delete?_method=DELETE" method="POST"><button class="btn btn-sm btn-danger">Delete</button></form>
                           </div>
+                          <% } %>
                         </form>
                       </div>
                     <div class="card-footer text-muted">

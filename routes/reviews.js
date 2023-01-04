@@ -3,23 +3,10 @@ const express = require('express');
 let FindrLocation = require('../models/dbFindrModel');
 const AppError = require('../factory/AppError');
 const wrapAsync = require('../factory/wrapAsync');
-const { reviewSchemaJOI } = require('../factory/validationSchemas.js');
 let Review = require('../models/Review');
 let router = express.Router({mergeParams: true});
-const { isLoggedIn } = require('../factory/middleware');
+const { isLoggedIn, validateReviews, checkReturnTo } = require('../factory/middleware');
 
-//functions
-let validateReviews = (req, res, next) => {
-    let { error } = reviewSchemaJOI.validate(req.body);
-    if(error){
-        let msg = error.details.map(el => el.message).join(`,`);
-        throw new AppError(msg, 400);
-    } else{
-        next();
-    };
-};
-
-//routes
 //reviews update
 router.put('/:id/:reviewId/edit', isLoggedIn, validateReviews, wrapAsync(async(req, res) => {
     let { id, reviewId } = req.params;
@@ -41,6 +28,11 @@ router.get('/:id/:reviewId/edit', isLoggedIn, wrapAsync (async (req, res, next) 
 //reviews delete
 router.delete('/:id/:reviewId/delete', isLoggedIn, wrapAsync(async(req, res) => {
     const { id, reviewId } = req.params;
+    const reviewData = await Review.findById(reviewId);
+    if(!reviewData.author.equals(req.user._id)){
+        req.flash('error', 'You do not have permission !');
+        return res.redirect(`/locations/${id}`);
+    }
     await FindrLocation.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
     await Review.findByIdAndDelete(reviewId);
     req.flash('success', 'Review successfully deleted !');
@@ -51,6 +43,7 @@ router.delete('/:id/:reviewId/delete', isLoggedIn, wrapAsync(async(req, res) => 
 router.post('/:id', isLoggedIn, validateReviews, wrapAsync(async(req, res) => {
     let post = await FindrLocation.findById(req.params.id);
     let review = new Review(req.body.review);
+    review.author = req.user._id;
     post.reviews.push(review);
     await review.save();
     await post.save();

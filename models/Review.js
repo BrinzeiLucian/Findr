@@ -11,7 +11,11 @@ let reviewSchema = new Schema({
         min: '1',
         max: '5',
         required: true
-    }
+    },
+    author:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
 },{
     timestamps: true,
 });
