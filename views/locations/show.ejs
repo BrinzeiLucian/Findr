@@ -21,11 +21,13 @@
             <div class="card-footer text-muted mb-3">
                 <%= data.createdAt %>
             </div>
+            <% if(currentUser && data.author.equals(currentUser._id)){ %> 
             <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-auto">
                 <a href="/locations/edit/<%= data._id %>"><input type="button" class="btn btn-info" value="Edit"></a>
                 <a href="/locations"><input type="button" class="btn btn-info" value="View all"></a>
                 <form action="/locations/<%= data._id %>/delete?_method=DELETE" method="POST"><button class="btn btn-danger">Delete</button></form>
             </div>
+            <% } %> 
         </div>
     </div>
     <div class="col-6">

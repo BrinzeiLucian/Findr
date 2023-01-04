@@ -23,26 +23,41 @@ let validateLocations = (req, res, next) => {
 //delete location
 router.delete('/:id/delete', isLoggedIn, wrapAsync (async ( req, res, next ) => {
     let { id } = req.params;
+    const deleteData = await FindrLocation.findById(id);
+    if(!deleteData.author.equals(req.user._id)){
+        req.flash('error', 'You do not have permission !');
+        return res.redirect(`/locations/${id}`);
+    } else {
     await FindrLocation.findByIdAndDelete(id);
     req.flash('success', 'Successfully deleted post !');
     res.redirect('/locations');
-}));
+}}));
 
 //update location
-router.put('/:id', validateLocations, isLoggedIn, wrapAsync (async (req, res, next) => {
-    let { id } = req.params;
-    let updateData = await FindrLocation.findByIdAndUpdate(id, { ...req.body.locations }, { runValidators: true, new: true } );
+router.put('/:id', isLoggedIn, validateLocations, wrapAsync (async (req, res, next) => {
+    const { id } = req.params;
+    const updateData = await FindrLocation.findById(id);
+    if(!updateData.author.equals(req.user._id)){
+        req.flash('error', 'You do not have permission !');
+        return res.redirect(`/locations/${id}`);
+    } else {
+    const updateCheckedData = await FindrLocation.findByIdAndUpdate(id, { ...req.body.locations }, { runValidators: true, new: true } );
     req.flash('success', 'Successfully edited post !');
     res.redirect(`/locations/${updateData._id}`);
-}));
+}}));
 
 //edit locations
 router.get('/edit/:id', isLoggedIn, wrapAsync (async (req, res, next) => {
-    let updateData = await FindrLocation.findById(req.params.id)
+    let { id } = req.params;
+    let updateData = await FindrLocation.findById(id);
     //if(!updateData){throw new AppError('Location not found !', 404);};
     if(!updateData){
         req.flash('error', 'Post id not found !');
         return res.redirect(`/locations`);
+    };
+    if(!updateData.author.equals(req.user._id)){
+        req.flash('error', 'You do not have permission !');
+        return res.redirect(`/locations/${id}`);
     };
     res.render('locations/edit', { pageName: `Edit`, updateData });
 }));
@@ -61,7 +76,7 @@ router.post('/', validateLocations, isLoggedIn, wrapAsync (async (req, res, next
 }));
 
 //location id
-router.get('/:id', isLoggedIn, wrapAsync (async (req, res) => {
+router.get('/:id', wrapAsync (async (req, res) => {
     let data = await FindrLocation.findById(req.params.id).populate('reviews').populate('author');
     //if(!data){throw new AppError('Location not found !', 404);};
     if(!data){
