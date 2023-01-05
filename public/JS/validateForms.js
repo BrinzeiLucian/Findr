@@ -1,7 +1,9 @@
 (function () {
 'use strict'
+
 // Fetch all the forms we want to apply custom Bootstrap validation styles to
 let forms = document.querySelectorAll('.validate-form')
+
 // Loop over them and prevent submission
 Array.from(forms)
 .forEach(function (form) {
@@ -12,5 +14,4 @@ event.stopPropagation()
 }
 form.classList.add('was-validated')
 }, false)
-})
-})();
+})})();
