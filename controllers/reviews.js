@@ -49,6 +49,10 @@ module.exports.editReview = async(req, res) => {
     try{
     let { id, reviewId } = req.params;
     const reviewData = await Review.findById(reviewId);
+    if(!reviewData.author.equals(req.user._id)){
+        req.flash('error', 'You do not have permission !');
+        return res.redirect(`/locations/${id}`);
+    }
     await Review.findByIdAndUpdate(reviewId, { ...req.body.review });
     req.flash('success', 'Review successfully edited !');
     res.redirect(`/locations/${id}`);
