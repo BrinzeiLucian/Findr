@@ -48,9 +48,10 @@ module.exports.renderReviewEditForm = async (req, res, next) => {
 module.exports.editReview = async(req, res) => {
     try{
     let { id, reviewId } = req.params;
-    await FindrLocation.findByIdAndUpdate(reviewId, { ...req.body.reviewData }, { runValidators: true, new: true });
+    const reviewData = await Review.findById(reviewId);
+    await Review.findByIdAndUpdate(reviewId, { ...req.body.review });
     req.flash('success', 'Review successfully edited !');
     res.redirect(`/locations/${id}`);
 } catch(err) {
-    console.log(err);
+    res.send(err);
 }};
