@@ -17,26 +17,9 @@
  * npm install connect-flash
  * npm i bcrypt
  * npm i passport passport-local passport-local-mongoose
+ * npm install multer
+ * npm install dotenv
+ * npm i cloudinary multer-storage-cloudinary
 
  Install with: <br/>
 **npm install**
-
----
-
-**How to use the API**
-
-* Get **Status** of each page: <br/>
-Use **GET** method on each page's **URL**
-
-* Create **New** location post: <br/>
-Use **POST** method on **baseURL**/locations <br/>
-Add required data payload as shown: <br/>
-**locations[title]**
-
-* **Update** existing location post: <br/>
-Use **PUT** method on **baseURL**/locations/**id** <br/>
-Add required data payload as shown: <br/>
-**locations[title]**
-
-* **Delete** existing location post: <br/>
-Use **DELETE** method on **baseURL**/locations/**id**/delete

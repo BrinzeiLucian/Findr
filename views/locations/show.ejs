@@ -3,7 +3,9 @@
 <div class="row mb-3">
     <div class="col-6">
         <div class="card">
-            <img src="<%= data.image %> " class="card-img-top" alt="A descriptive image for <%= data.title %>">
+            <% for(let img of data.images) {%>
+                <img src="<%= img.url %>" class="card-img-top" alt="Images of <%= data.title %>">
+                <% } %>  
             <div class="card-body">
               <h1 class="card-title"><%= data.title %></h1>
               <h3 class="card-title text-muted"><%= data.location %></h3>

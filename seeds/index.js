@@ -74,7 +74,7 @@ seedDB().then(() => {
         try {
           const resp = await axios.get('https://api.unsplash.com/photos/random', {
             params: {
-              client_id: 'Izj2Y1eT1fRXqdepNOq0-54fDl_hDNheTOHJihs_aRI',
+              client_id: process.env.unsplash_id,
               collections: 1114848,
             },
           })

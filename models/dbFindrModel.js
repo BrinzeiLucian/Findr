@@ -2,6 +2,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let Review = require('./Review');
+const { string } = require('joi');
 
 //database schema
 let dbFindrSchema = new Schema ({
@@ -12,9 +13,10 @@ let dbFindrSchema = new Schema ({
     title: {
         type: String
         },
-    image: {
-        type: String
-    },
+    images: [{
+        url: String,
+        filename: String
+    }],
     location: {
         type: String
     },

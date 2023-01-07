@@ -1,4 +1,9 @@
-//requires
+if(process.env.NODE_ENV !== "production"){
+    require('dotenv').config();
+};
+
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const express = require('express');
 const flash = require('connect-flash');
 const app = express();
@@ -20,6 +25,8 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const User = require('./models/User');
 const authRouter = require('./routes/auth');
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 //set local server PORT
 let port = 8080;

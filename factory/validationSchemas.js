@@ -7,7 +7,7 @@ module.exports.validationLocationsSchemaJOI = Joi.object({
         title: Joi.string().required(),
         location: Joi.string().required(),
         description: Joi.string().required(),
-        image: Joi.string().required(),
+        //image: Joi.string().required(),
         phone: Joi.string(),
         website: Joi.string(),
         email: Joi.string(),

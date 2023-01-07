@@ -2,7 +2,7 @@
 <div class="row">
   <h1 class="text-center">Add new location</h1>
     <div class="col-6 offset-3" >
-      <form class="validate-form" action="/locations" method="POST" novalidate>
+      <form class="validate-form" action="/locations" method="POST" novalidate enctype="multipart/form-data">
         <div class="row h-100 justify-content-center align-items-center">
         <div class="col-10 col-md-8 col-lg-10">
         <br>
@@ -36,9 +36,16 @@
           <input type="url" class="form-control" id="website" name="locations[website]" pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?" placeholder="https://www.example.com/" required>
         </div>
         <br>
+        <!--
         <div class="form-group">
           <label for="image">Image URL:</label>
           <input type="url" class="form-control" id="image" name="locations[image]" pattern="https://.*" placeholder="https://www.example.com/photo" required>
+        </div>
+        -->
+        <div class="form-group">
+          <label for="images">Upload image:</label>
+          <br>
+          <input type="file" class="form-control" name="images" id="images"  name="locations[images]" multiple required>
         </div>
         <br>
         <button type="submit" class="btn btn-info">Submit</button>

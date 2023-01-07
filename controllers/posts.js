@@ -31,6 +31,7 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createNewPost = async (req, res, next) => {
     let newLocation = FindrLocation(req.body.locations);
+    newLocation.images = req.files.map(f => ({url: f.path, filename: f.filename}));
     newLocation.author = req.user._id;
     await newLocation.save();
     req.flash('success', 'Successfully created post !');
