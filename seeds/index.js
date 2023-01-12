@@ -55,10 +55,15 @@ const seedDB = async () => {
             title: `${descriptors[descriptorsSeed]} ${places[placeSeed]}`,
             location: `${cities[citySeed].city}, ${cities[citySeed].state}`,
             description: lorem.generateParagraphs(2),
-            image: await seedImg(),
             phone: '0777 777 777',
             website: 'https://www.SeedTestData.com/',
-            email: 'seedtestdata@mail.com'
+            email: 'seedtestdata@mail.com',
+            images: [
+              {
+                url: '',
+                filename:''
+              }
+            ]
         })
         await db.save();
     }
