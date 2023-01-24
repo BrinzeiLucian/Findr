@@ -15,7 +15,7 @@ const upload = multer({ storage });
 router.delete('/:id/delete', isLoggedIn, wrapAsync(posts.deletePost));
 
 //update post
-router.put('/:id', isLoggedIn, validateLocations, wrapAsync(posts.updatePost));
+router.put('/:id', isLoggedIn, upload.array('images'), validateLocations, wrapAsync(posts.updatePost));
 router.get('/edit/:id', isLoggedIn, wrapAsync(posts.renderEditForm));
 
 //new post

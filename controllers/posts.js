@@ -61,6 +61,9 @@ module.exports.updatePost = async (req, res, next) => {
         return res.redirect(`/locations/${id}`);
     } else {
     const updateCheckedData = await FindrLocation.findByIdAndUpdate(id, { ...req.body.locations }, { runValidators: true, new: true } );
+    const images = req.files.map(f => ({url: f.path, filename: f.filename}));
+    updateCheckedData.images.push(...images);
+    await updateCheckedData.save();
     req.flash('success', 'Successfully edited post !');
     res.redirect(`/locations/${updateData._id}`);
 }};
