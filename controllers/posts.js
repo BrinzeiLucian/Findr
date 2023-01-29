@@ -6,6 +6,7 @@ const AppError = require('../factory/AppError');
 const wrapAsync = require('../factory/wrapAsync');
 const router = express.Router({mergeParams: true});
 const { isLoggedIn, validateLocations } = require('../factory/middleware');
+const { cloudinary } = require('../cloudinary');
 
 //controllers
 module.exports.index = async (req, res, next) => {
@@ -64,6 +65,12 @@ module.exports.updatePost = async (req, res, next) => {
     const images = req.files.map(f => ({url: f.path, filename: f.filename}));
     updateCheckedData.images.push(...images);
     await updateCheckedData.save();
+    if(req.body.deleteImages){
+        for(let filename of req.body.deleteImages){
+           await cloudinary.uploader.destroy(filename);
+        };
+        await updateCheckedData.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages }}}});
+    };
     req.flash('success', 'Successfully edited post !');
     res.redirect(`/locations/${updateData._id}`);
 }};

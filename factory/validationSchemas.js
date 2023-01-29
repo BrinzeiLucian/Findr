@@ -11,7 +11,8 @@ module.exports.validationLocationsSchemaJOI = Joi.object({
         phone: Joi.string(),
         website: Joi.string(),
         email: Joi.string(),
-    }).required()
+    }).required(),
+    deleteImages: Joi.array()
 });
 
 module.exports.reviewSchemaJOI = Joi.object({
