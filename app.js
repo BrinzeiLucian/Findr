@@ -27,6 +27,9 @@ const User = require('./models/User');
 const authRouter = require('./routes/auth');
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
+const mongoSanitize = require('express-mongo-sanitize');
+const sanitizeHtml = require('sanitize-html');
+//const helmet = require('helmet');
 
 //set local server PORT
 let port = 8080;
@@ -51,7 +54,8 @@ app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
 
 app.use(cookieParser('secret'));
-let sessionOptions = { 
+let sessionOptions = {
+    name: 'session', 
     secret: 'secret',
     resave: false,
     saveUninitialized: true,
@@ -79,6 +83,10 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 });
+
+//sanitize
+app.use(mongoSanitize());
+//app.use(helmet( { contentSecurityPolicy: false } ) );
 
 //route handlers
 app.use('/locations/reviews', reviewsRouter);

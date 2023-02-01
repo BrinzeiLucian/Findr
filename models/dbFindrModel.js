@@ -2,7 +2,6 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let Review = require('./Review');
-const { string } = require('joi');
 
 const ImageSchema = new Schema ({
         url: String,
