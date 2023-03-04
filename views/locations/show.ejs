@@ -116,7 +116,8 @@
                   <p class="mt-3 mb-4 pb-2">
                     <%= review.comment %>
                   </p>
-
+                </div>
+            </div>
                   <% if(currentUser && review.author.equals(currentUser._id)){ %> 
                     <hr>
                     <div class="small d-flex justify-content-start">
@@ -128,13 +129,11 @@
                             <form action="/locations/reviews/<%= data._id %>/<%= review._id %>/delete?_method=DELETE" method="POST"><button class="btn btn-sm btn-danger">Delete</button></form>
                         </a>
                     </div>
-                    </div>
-                    <% } %>
-                    </div>
-                  </div>
+                </div>
+            <% } %>
       </section>
-    <% } %> 
 </div>
+<% } %>
 <!--style-->
 <style>
 body {
