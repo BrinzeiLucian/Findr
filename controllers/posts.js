@@ -51,7 +51,7 @@ module.exports.renderEditForm = async (req, res, next) => {
         req.flash('error', 'You do not have permission !');
         return res.redirect(`/locations/${id}`);
     };
-    res.render('locations/edit', { pageName: `Edit`, updateData });
+    res.render('locations/edit', { pageName: `Edit`, updateData, CSS: 'global.css' });
 };
 
 module.exports.updatePost = async (req, res, next) => {
