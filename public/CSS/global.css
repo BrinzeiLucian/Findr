@@ -170,24 +170,28 @@
   }
   
   #search_button{
-    position:fixed;
+    position: absolute;
     width: auto;
     height: auto;
-    margin-top: 3.8%;
+    margin-top: 25%;
     margin-bottom: 25%;
-    margin-left: 19%;
+    margin-left: 40%;
   }
 
   @media (min-width: 1024px) {
     .search-wrapper input {
       width: 75%;
-      margin-left: 50vh;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 50%;
     }
   }
   
   @media (max-width: 991px) {
     .search-wrapper input {
       width: 25%;
-      margin-left: 50vh;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 40%;
     }
   }
