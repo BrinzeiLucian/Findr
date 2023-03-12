@@ -67,3 +67,8 @@ module.exports.logout = (req, res, next) => {
       res.redirect('/locations');
     });
 };
+
+//renderDashboardPage
+module.exports.renderDashboardPage = (req, res) => {
+    res.render('/dashboard', { pageName: 'Dashboard'});
+};
