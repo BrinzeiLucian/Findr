@@ -21,7 +21,6 @@ router.get('/edit/:id', isLoggedIn, wrapAsync(posts.renderEditForm));
 //new post
 router.get('/new', isLoggedIn, posts.renderNewForm);
 router.post('/', isLoggedIn, upload.array('images'), validateLocations, wrapAsync(posts.createNewPost));
-//router.post('/', validateLocations, isLoggedIn, wrapAsync(posts.createNewPost));
 
 //post id
 router.get('/:id', wrapAsync(posts.Id));

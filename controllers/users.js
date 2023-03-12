@@ -70,5 +70,5 @@ module.exports.logout = (req, res, next) => {
 
 //renderDashboardPage
 module.exports.renderDashboardPage = (req, res) => {
-    res.render('/dashboard', { pageName: 'Dashboard'});
+    res.render('user/dashboard', { pageName: 'Dashboard'});
 };

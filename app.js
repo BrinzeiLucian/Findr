@@ -19,6 +19,7 @@ const reviewsRouter = require('./routes/reviews');
 const locationsRouter = require('./routes/locations');
 const adminRouter = require('./routes/admin');
 const rootRouter = require('./routes/root');
+const userRouter = require('./routes/dashboard');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
@@ -93,6 +94,7 @@ app.use('/locations/reviews', reviewsRouter);
 app.use('/locations', locationsRouter);
 app.use('/admin', adminRouter);
 app.use(rootRouter);
+app.use('/user', userRouter);
 app.use('/', authRouter);
 
 //serving static files
