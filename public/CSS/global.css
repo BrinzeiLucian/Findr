@@ -1,12 +1,16 @@
-/*global variables*/
 :root {
     scroll-behavior: smooth;
+    /*global colors variables*/
     --white: #fff;
     --gray: #444444;
+    --black: #000;
     --strong-blue: #4154f1;
     --dark-blue: #012970;
     --light-purple: #717ff5;
     --orange: #e48e1e;
+    --light-orange: #fcbf70;
+    --shadow: rgba(1, 41, 112, 0.08);
+    --create-pink: #962671;
   }
   
   body {
@@ -20,7 +24,7 @@
   }
   
   a:hover {
-    color: var(--light-purple);
+    color: var(--light-orange);
     text-decoration: none;
   }
   
@@ -119,7 +123,7 @@
   
   .values .box {
     padding: 30px;
-    box-shadow: 0px 0 5px rgba(1, 41, 112, 0.08);
+    box-shadow: 0px 0 5px var(--shadow);
     text-align: center;
     transition: 0.3s;
     height: 100%;
@@ -139,46 +143,51 @@
   }
   
   .values .box:hover {
-    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+    box-shadow: 0px 0 30px var(--shadow);
   }
   
   .values .box:hover img {
     transform: scale(1);
   }
-  
-  /*--------------------------------------------------------------
-  # Counts
-  --------------------------------------------------------------*/
-  .counts {
-    padding: 70px 0 60px;
+
+  .btn-create-post{
+    color: var(--black);
+  }
+
+  .wrapper {
+    position: relative;
+    display: inline-block;
   }
   
-  .counts .count-box {
-    display: flex;
-    align-items: center;
-    padding: 30px;
-    width: 100%;
-    background: #fff;
-    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+  .search-wrapper {
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 100vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
   }
   
-  .counts .count-box i {
-    font-size: 42px;
-    line-height: 0;
-    margin-right: 20px;
-    color: #4154f1;
+  #search_button{
+    position:fixed;
+    width: auto;
+    height: auto;
+    margin-top: 3.8%;
+    margin-bottom: 25%;
+    margin-left: 19%;
+  }
+
+  @media (min-width: 1024px) {
+    .search-wrapper input {
+      width: 75%;
+      margin-left: 50vh;
+    }
   }
   
-  .counts .count-box span {
-    font-size: 36px;
-    display: block;
-    font-weight: 600;
-    color: #0b198f;
-  }
-  
-  .counts .count-box p {
-    padding: 0;
-    margin: 0;
-    font-family: "Nunito", sans-serif;
-    font-size: 14px;
+  @media (max-width: 991px) {
+    .search-wrapper input {
+      width: 25%;
+      margin-left: 50vh;
+    }
   }
