@@ -1,13 +1,12 @@
 //imports
 const express = require('express');
-let router = express.Router();
+const router = express.Router();
 const User = require('../models/User');
 const wrapAsync = require('../factory/wrapAsync');
 const passport = require('passport');
 const { session } = require('passport');
 const { checkReturnTo } = require('../factory/middleware');
 
-//controllers
 //render register page
 module.exports.renderRegisterPage = (req, res) => {
     res.render('auth/register', { pageName: 'User Registration'});
@@ -69,6 +68,6 @@ module.exports.logout = (req, res, next) => {
 };
 
 //renderDashboardPage
-module.exports.renderDashboardPage = (req, res) => {
-    res.render('user/dashboard', { pageName: 'Dashboard'});
+module.exports.renderDashboardPage = async (req, res) => {
+   await res.render('user/dashboard', { pageName: 'Dashboard'});
 };

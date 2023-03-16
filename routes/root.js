@@ -1,11 +1,11 @@
 //requires
 const express = require('express');
-let router = express.Router();
+const router = express.Router();
+const root = require('../controllers/root');
+const wrapAsync = require('../factory/wrapAsync');
 
 //root route 
-router.get('/', (req, res) => {
-    res.render('home', { pageName: 'Home' });
-});
+router.get('/', wrapAsync (root.root));
 
 //export
 module.exports = router;
