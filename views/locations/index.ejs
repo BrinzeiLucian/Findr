@@ -1,25 +1,153 @@
-<% layout('layouts/boilerplate') %>
-        <h1><%= pageName %></h1>
+<%-include('../layouts/head')%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="/../CSS/global.css">
+<link rel="stylesheet" href="/../CSS/stars.css">
+<link rel="stylesheet" href="/../CSS/postsindex.css">
+
+<body>
+<%-include('../partials/navbar')%>
+<div class="container mt-3">
+<%-include('../partials/flash')%>
+<div class="row">
+<aside class="col-md-3">		
+<div class="card">
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+				<i class="icon-control fa"></i>
+				<h6 class="title">Search</h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse_1">
+			<div class="card-body">
+				<form class="pb-3">
+				<div class="input-group">
+				  <input type="text" class="form-control" placeholder="Search">
+				</div>
+				</form>
+			</div> 
+		</div>
+	</article>
+
+    <article class="filter-group">
+        <header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+				<i class="icon-control fa"></i>
+				<h6 class="title">Filter by</h6>
+			</a>
+		</header>
+        <select class="mt-4 mb-4 p-2 form-control">
+            <option>Latest items</option>
+            <option>Trending</option>
+            <option>Most Popular</option>
+            <option>Cheapest</option>
+        </select>
+    </article>
+
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+				<i class="icon-control fa"></i>
+				<h6 class="title">Tags</h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show col" id="collapse_2">
+			<div class="card-body">
+				<label class="custom-control custom-checkbox">
+				  <input type="checkbox" checked="" class="custom-control-input"> Restaurant  
+				</label>
+	    </div>
+	</div>
+    <div class="filter-content collapse show col" id="collapse_2">
+        <div class="card-body">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"> Bar  
+            </label>
+        </div>
+    </div>
+
+    <div class="filter-content collapse show col" id="collapse_2">
+        <div class="card-body">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"> Wine Shop  
+            </label>
+        </div>
+    </div>
+	</article>
+
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
+				<i class="icon-control fa"></i>
+				<h6 class="title">Rating </h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show mt-2 mb-2 " id="collapse_4">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+    </div>
+	</article>
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" class="">
+				<i class="icon-control fa"></i>
+			</a>
+		</header>
+	</article>
+</div>
+</aside>
+<main class="col-md-9">
+
+<header class="border-bottom mb-4 pb-3">
+		<div class="form-inline">
+			<span class="mr-md-auto">32 Items found </span>
+		</div>
+</header>
+
+<div class="row">
+	<div class="row row-cols-3 g-3 gap-3">
         <% for (let items of Findr){ %>
-                <div class="card mb-3">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="<%= items.images[0].url %>" alt="location image" class="img-fluid">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%= items.title %> 
-                                </h5>
-                                <p class="card-text">
-                                    <%= items.description %> 
-                                </p>
-                                <p class="card-text">
-                                    <small class="text-muted"><%= items.location %></small> 
-                                </p>
-                                <a href="/locations/<%= items._id %>" class="btn btn-info">View more details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
+		<figure class="card card-product-grid">
+			<div class="img-wrap">
+				<img src="<%= items.images[0].url %>" alt="location image" class="img-fluid">
+				<a class="btn-overlay" href="/locations/<%= items._id %>"><i class="fa fa-search-plus"></i> Quick view</a>
+			</div>
+			<figcaption class="info-wrap">
+			<div class="fix-height">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= items.title %> 
+                        </h5>
+                        <p class="card-text">
+                            <small class="text-muted"><%= items.location %></small> 
+                        </p> 
+			</div>
+				<a href="/locations/<%= items._id %>" class="btn btn-block btn-info">See more </a>
+			</figcaption>
+		</figure>
+        <% } %>
+	</div>
+</div>
+
+<nav class="mt-4" aria-label="Page navigation sample">
+  <ul class="pagination">
+    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
+	</main>
+	</div>
+</div>
+<%-include('../partials/footer')%>
+</body>
