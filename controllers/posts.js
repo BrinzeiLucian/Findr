@@ -11,7 +11,8 @@ const { cloudinary } = require('../cloudinary');
 //controllers
 module.exports.index = async (req, res, next) => {
     let Findr = await FindrLocation.find({});
-    res.render('locations/index', { pageName: 'Posts', Findr });
+    let postCount = await FindrLocation.countDocuments();
+    res.render('locations/index', { pageName: 'Posts', Findr, postCount });
 };
 
 module.exports.Id = async (req, res) => {

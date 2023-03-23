@@ -16,10 +16,10 @@
 <div class="card">
 	<article class="filter-group">
 		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+			<p data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
 				<i class="icon-control fa"></i>
 				<h6 class="title">Search</h6>
-			</a>
+			</p>
 		</header>
 		<div class="filter-content collapse show" id="collapse_1">
 			<div class="card-body">
@@ -34,10 +34,10 @@
 
     <article class="filter-group">
         <header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+			<p data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
 				<i class="icon-control fa"></i>
 				<h6 class="title">Filter by</h6>
-			</a>
+			</p>
 		</header>
         <select class="mt-4 mb-4 p-2 form-control">
             <option>Latest items</option>
@@ -49,10 +49,10 @@
 
 	<article class="filter-group">
 		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+			<p 	data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
 				<i class="icon-control fa"></i>
 				<h6 class="title">Tags</h6>
-			</a>
+			</p>
 		</header>
 		<div class="filter-content collapse show col" id="collapse_2">
 			<div class="card-body">
@@ -80,10 +80,10 @@
 
 	<article class="filter-group">
 		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
+			<p data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
 				<i class="icon-control fa"></i>
 				<h6 class="title">Rating </h6>
-			</a>
+			</p>
 		</header>
 		<div class="filter-content collapse show mt-2 mb-2 " id="collapse_4">
             <span class="fa fa-star checked"></span>
@@ -102,16 +102,16 @@
 	</article>
 </div>
 </aside>
-<main class="col-md-9">
 
+<main class="col-md-9">
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
-			<span class="mr-md-auto">32 Items found </span>
+			<span class=""><%= postCount %> Items found </span>
 		</div>
 </header>
 
 <div class="row">
-	<div class="row row-cols-3 g-3 gap-3">
+	<div class="row row-cols-3 gap-3">
         <% for (let items of Findr){ %>
 		<figure class="card card-product-grid">
 			<div class="img-wrap">
@@ -145,9 +145,10 @@
     <li class="page-item"><a class="page-link" href="#">Next</a></li>
   </ul>
 </nav>
-
-	</main>
-	</div>
 </div>
-<%-include('../partials/footer')%>
+</div>
+</div>
+<div class="footer" style="position: fixed;">
+	<%-include('../partials/footer')%>
+</div>
 </body>

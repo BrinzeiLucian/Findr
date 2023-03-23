@@ -178,20 +178,149 @@
     margin-left: 40%;
   }
 
-  @media (min-width: 1024px) {
+  /* media sizes */
+
+  @media screen and (min-width: 320px) {
     .search-wrapper input {
       width: 75%;
       margin-top: 25%;
       margin-bottom: 25%;
       margin-left: 50%;
     }
-  }
-  
-  @media (max-width: 991px) {
-    .search-wrapper input {
-      width: 25%;
+
+    #search_button{
+      position: absolute;
+      width: auto;
+      height: auto;
       margin-top: 25%;
       margin-bottom: 25%;
       margin-left: 40%;
     }
+
+  }
+  
+  @media screen and (min-width: 480px) {
+    .search-wrapper input {
+      width: 75%;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 50%;
+    }
+
+    #search_button{
+      position: absolute;
+      width: auto;
+      height: auto;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 40%;
+    }
+
+  }
+
+
+  @media screen and (min-width: 600px) {
+    .search-wrapper input {
+      width: 75%;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 50%;
+    }
+
+    #search_button{
+      position: absolute;
+      width: auto;
+      height: auto;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 40%;
+    }
+
+  }
+
+  @media screen and (min-width: 768px) {
+    .search-wrapper input {
+      width: 75%;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 50%;
+    }
+
+    #search_button{
+      position: absolute;
+      width: auto;
+      height: auto;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 40%;
+    }
+
+  }
+
+
+  @media screen and (min-width: 900px) {
+    .search-wrapper input {
+      width: 75%;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 50%;
+    }
+
+    #search_button{
+      position: absolute;
+      width: auto;
+      height: auto;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 40%;
+    }
+
+  }
+
+  @media screen and (min-width: 1024px) {
+    .search-wrapper input {
+      width: 75%;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 50%;
+    }
+
+    #search_button{
+      position: absolute;
+      width: auto;
+      height: auto;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 40%;
+    }
+
+  }
+
+
+  @media screen and (min-width: 1200px) {
+    .search-wrapper input {
+      width: 75%;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 50%;
+    }
+
+    #search_button{
+      position: absolute;
+      width: auto;
+      height: auto;
+      margin-top: 25%;
+      margin-bottom: 25%;
+      margin-left: 40%;
+    }
+
+  }
+
+  /**************************/
+
+  .footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
   }
