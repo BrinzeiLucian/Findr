@@ -110,29 +110,67 @@
 		</div>
 </header>
 
-<div class="row">
-	<div class="row row-cols-3 gap-3">
-        <% for (let items of Findr){ %>
-		<figure class="card card-product-grid">
-			<div class="img-wrap">
-				<img src="<%= items.images[0].url %>" alt="location image" class="img-fluid">
-				<a class="btn-overlay" href="/locations/<%= items._id %>"><i class="fa fa-search-plus"></i> Quick view</a>
-			</div>
-			<figcaption class="info-wrap">
-			<div class="fix-height">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= items.title %> 
-                        </h5>
-                        <p class="card-text">
-                            <small class="text-muted"><%= items.location %></small> 
-                        </p> 
-			</div>
-				<a href="/locations/<%= items._id %>" class="btn btn-block btn-info">See more </a>
-			</figcaption>
-		</figure>
-        <% } %>
+<div class="column">
+	<div class="column columns-cols-3 gap-3">
+		<section>
+			<div class="container">
+				<% for (let items of Findr){ %>
+			  <div class="row justify-content-center mb-3">
+				<div class="col-md-12 col-xl-12">
+				  <div class="card shadow-0 border rounded-3">
+					<div class="card-body">
+					  <div class="row">
+						<div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+						  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+							<img src="<%= items.images[0].url %>" alt="location image" class="img-fluid w-100">
+							<a href="#!">
+							  <div class="hover-overlay">
+								<div class="mask"></div>
+							  </div>
+							</a>
+						  </div>
+						</div>
+						<div class="col-md-6 col-lg-6 col-xl-6">
+						  <h5><b><%= items.title %></b></h5>
+						  <div class="d-flex flex-row">
+							<div class="text-danger mb-1 me-2">
+							  <i class="fa fa-star"></i>
+							  <i class="fa fa-star"></i>
+							  <i class="fa fa-star"></i>
+							  <i class="fa fa-star"></i>
+							</div>
+							<span>4.5 (310)</span>
+						  </div>
+						  <div class="mt-1 mb-0 text-muted small">
+							<span>Tag</span>
+							<span class="text-primary"> • </span>
+							<span>Tag</span>
+							<span class="text-primary"> • </span>
+							<span>Tag<br /></span>
+						  </div>
+						  <div class="mb-2 text-muted small">
+							<span>Tag</span>
+							<span class="text-primary"> • </span>
+							<span>Tag</span>
+							<span class="text-primary"> • </span>
+							<span>Tag<br /></span>
+						  </div>
+						  <h5 class="text-muted small"><%= items.location %></5>
+						  <h6 class="text-truncate mb-4 mb-md-0" style="overflow-wrap: break-word;"><%= items.description %></h6>
+						</div>
+						<div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+						  <div class="d-flex flex-column mt-4">
+							<a href="/locations/<%= items._id %>" class="btn btn-block btn-warning index-btn-orange">See more</a>
+							<button class="btn btn-outline-warning btn-sm mt-2" type="button">Add to favorites</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <% } %>	
+		  </section>        
 	</div>
 </div>
 
@@ -148,7 +186,7 @@
 </div>
 </div>
 </div>
-<div class="footer" style="position: fixed;">
+<div class="footer">
 	<%-include('../partials/footer')%>
 </div>
 </body>

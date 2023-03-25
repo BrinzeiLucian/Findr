@@ -39,8 +39,12 @@ let dbFindrSchema = new Schema ({
     },
     reviews: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
+            type: Schema.Types.ObjectId
+        }
+    ],
+    tags: [
+        {
+        type: String
         }
     ]
 },{
