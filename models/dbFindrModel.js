@@ -39,7 +39,8 @@ let dbFindrSchema = new Schema ({
     },
     reviews: [
         {
-            type: Schema.Types.ObjectId
+            type: Schema.Types.ObjectId,
+            ref: 'Review'
         }
     ],
     tags: [
@@ -47,7 +48,7 @@ let dbFindrSchema = new Schema ({
         type: String
         }
     ]
-},{
+    },{
     timestamps: true,
 });
 

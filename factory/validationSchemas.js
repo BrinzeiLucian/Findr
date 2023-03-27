@@ -38,6 +38,7 @@ module.exports.validationLocationsSchemaJOI = Joi.object({
         phone: Joi.string().escapeHTML(),
         website: Joi.string().escapeHTML(),
         email: Joi.string().escapeHTML(),
+        tags: Joi.string().escapeHTML(),
     }).required(),
     deleteImages: Joi.array()
 });
