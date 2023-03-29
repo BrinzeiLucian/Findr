@@ -1,5 +1,5 @@
 //require
-const baseJoi = require('Joi');
+const baseJoi = require('joi');
 const sanitizeHtml = require('sanitize-html');
 
 //html sanitization
@@ -29,7 +29,7 @@ const sanitization = (Joi) => ({
 const Joi = baseJoi.extend(sanitization);
 
 //locations validation schema
-module.exports.validationLocationsSchemaJOI = Joi.object({
+module.exports.validationLocationsSchemaJOI = Joi.object({ 
     locations: Joi.object({
         title: Joi.string().required().escapeHTML(),
         location: Joi.string().required().escapeHTML(),
@@ -38,10 +38,10 @@ module.exports.validationLocationsSchemaJOI = Joi.object({
         phone: Joi.string().escapeHTML(),
         website: Joi.string().escapeHTML(),
         email: Joi.string().escapeHTML(),
-        tags: Joi.string().escapeHTML(),
+        tags: Joi.array().items(Joi.string().allow().optional()),
     }).required(),
     deleteImages: Joi.array()
-});
+}).options({ allowUnknown: true });
 
 module.exports.reviewSchemaJOI = Joi.object({
     review: Joi.object({

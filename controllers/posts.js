@@ -19,7 +19,6 @@ module.exports.Id = async (req, res) => {
     let data = await FindrLocation.findById(req.params.id)
     .populate({path: 'reviews', populate:{path:'author'}})
     .populate('author');
-    //if(!data){throw new AppError('Location not found !', 404);};
     if(!data){
         req.flash('error', 'Post id not found !');
         return res.redirect(`/locations`);
@@ -35,6 +34,8 @@ module.exports.createNewPost = async (req, res, next) => {
     let newLocation = FindrLocation(req.body.locations);
     newLocation.images = req.files.map(f => ({url: f.path, filename: f.filename}));
     newLocation.author = req.user._id;
+    //newLocation.tags(...req.body.tags);
+    //forEach(eachTag).push();
     await newLocation.save();
     req.flash('success', 'Successfully created post !');
     res.redirect(`locations/${newLocation._id}`);
@@ -43,7 +44,6 @@ module.exports.createNewPost = async (req, res, next) => {
 module.exports.renderEditForm = async (req, res, next) => {
     let { id } = req.params;
     let updateData = await FindrLocation.findById(id);
-    //if(!updateData){throw new AppError('Location not found !', 404);};
     if(!updateData){
         req.flash('error', 'Post id not found !');
         return res.redirect(`/locations`);
