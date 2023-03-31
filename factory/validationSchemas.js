@@ -35,10 +35,10 @@ module.exports.validationLocationsSchemaJOI = Joi.object({
         location: Joi.string().required().escapeHTML(),
         description: Joi.string().required().escapeHTML(),
         //images: Joi.string().required().escapeHTML(),
-        phone: Joi.string().escapeHTML(),
-        website: Joi.string().escapeHTML(),
-        email: Joi.string().escapeHTML(),
-        tags: Joi.array().items(Joi.string().allow().optional()),
+        phone: Joi.string().required().escapeHTML(),
+        website: Joi.string().required().escapeHTML(),
+        email: Joi.string().required().escapeHTML(),
+        tags: Joi.string().required().escapeHTML(),
     }).required(),
     deleteImages: Joi.array()
 }).options({ allowUnknown: true });

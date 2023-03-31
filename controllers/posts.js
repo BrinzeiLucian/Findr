@@ -31,12 +31,15 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createNewPost = async (req, res, next) => {
-    let newLocation = FindrLocation(req.body.locations);
-    newLocation.images = req.files.map(f => ({url: f.path, filename: f.filename}));
+    const newLocation = FindrLocation(req.body.locations);
+    newLocation.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     newLocation.author = req.user._id;
-    //newLocation.tags(...req.body.tags);
-    //forEach(eachTag).push();
+    newLocation.tags = req.body.locations.tags
+        .split(',')
+        .map(tag => tag.trim());
+    
     await newLocation.save();
+    
     req.flash('success', 'Successfully created post !');
     res.redirect(`locations/${newLocation._id}`);
 };

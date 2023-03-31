@@ -65,23 +65,7 @@
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <label for="tags">Tags:</label>
-                        <div class="tag-wrapper">
-                          <div class="content">
-                            <label>Press enter or add a comma after each tag.</label>
-                            <div class="tag-box">
-                              <ul class="ul">
-                                <input type="text" name="locations[tags][]" class="tags input" required>
-                              </ul>
-                            </div>
-                          </div>
-                          <div class="details">
-                            <p><span class="spanCount"></span> tag(s) remaining...</p>
-                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                              <button class="btn btn-warning btn-create-post add-tags m-1">Add</button>
-                              <button class="btn btn-danger btn-create-post clear-tags m-1">Clear</button>
-                            </div>
-                          </div>
-                        </div>
+                        <input type="text" name="locations[tags]" id="tags" class="form-control tags input" pattern="(#[a-zA-Z0-9]+,? *)*#[a-zA-Z0-9]+" placeholder="#Restaurant,#Pub" required>
                       </div>
                     </div>
 

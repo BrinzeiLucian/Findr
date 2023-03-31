@@ -43,7 +43,11 @@ let dbFindrSchema = new Schema ({
             ref: 'Review'
         }
     ],
-    tags: [String],
+    tags: [
+        {
+            type: String
+        }
+    ]
     },
     {
     timestamps: true,
