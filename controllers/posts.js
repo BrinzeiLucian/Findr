@@ -14,12 +14,13 @@ module.exports.index = async (req, res, next) => {
     let Findr;
     let postCount;
     if(q){
-        Findr = await FindrLocation.find( { tags: `${'#'+q.split('%23'.trim())}` } );
-        postCount = await Findr.countDocuments();
+    Findr = await FindrLocation.find( { tags: `${'#'+q.split('%23'.trim())}` } );
+    postCount = await Findr.countDocuments();
     } else {
     Findr = await FindrLocation.find({});
     postCount = await FindrLocation.countDocuments();
     };
+    console.log(Findr, postCount);
     res.render('locations/index', { pageName: 'Posts', q, Findr, postCount });
 };
 
