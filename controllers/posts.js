@@ -10,9 +10,17 @@ const { cloudinary } = require('../cloudinary');
 
 //controllers
 module.exports.index = async (req, res, next) => {
-    let Findr = await FindrLocation.find({});
-    let postCount = await FindrLocation.countDocuments();
-    res.render('locations/index', { pageName: 'Posts', Findr, postCount });
+    let { q } = req.query;
+    let Findr;
+    let postCount;
+    if(q){
+        Findr = await FindrLocation.find( { tags: `${'#'+q.split('%23'.trim())}` } );
+        postCount = await Findr.countDocuments();
+    } else {
+    Findr = await FindrLocation.find({});
+    postCount = await FindrLocation.countDocuments();
+    };
+    res.render('locations/index', { pageName: 'Posts', q, Findr, postCount });
 };
 
 module.exports.Id = async (req, res) => {
@@ -34,12 +42,8 @@ module.exports.createNewPost = async (req, res, next) => {
     const newLocation = FindrLocation(req.body.locations);
     newLocation.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     newLocation.author = req.user._id;
-    newLocation.tags = req.body.locations.tags
-        .split(',')
-        .map(tag => tag.trim());
-    
+    newLocation.tags = req.body.locations.tags.split(',').map(tag => tag.trim());
     await newLocation.save();
-    
     req.flash('success', 'Successfully created post !');
     res.redirect(`locations/${newLocation._id}`);
 };
@@ -55,7 +59,7 @@ module.exports.renderEditForm = async (req, res, next) => {
         req.flash('error', 'You do not have permission !');
         return res.redirect(`/locations/${id}`);
     };
-    res.render('locations/edit', { pageName: `Edit`, updateData, CSS: 'global.css' });
+    res.render('locations/edit', { pageName: `Edit`, updateData });
 };
 
 module.exports.updatePost = async (req, res, next) => {
@@ -66,6 +70,7 @@ module.exports.updatePost = async (req, res, next) => {
         return res.redirect(`/locations/${id}`);
     } else {
     const updateCheckedData = await FindrLocation.findByIdAndUpdate(id, { ...req.body.locations }, { runValidators: true, new: true } );
+    updateCheckedData.tags = req.body.locations.tags.split(',').map(tag => tag.trim());
     const images = req.files.map(f => ({url: f.path, filename: f.filename}));
     updateCheckedData.images.push(...images);
     await updateCheckedData.save();
