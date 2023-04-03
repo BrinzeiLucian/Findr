@@ -10,18 +10,19 @@ const { cloudinary } = require('../cloudinary');
 
 //controllers
 module.exports.index = async (req, res, next) => {
-    let { q } = req.query;
+    let { locations } = req.query;
     let Findr;
     let postCount;
-    if(q){
-    Findr = await FindrLocation.find( { tags: `${'#'+q.split('%23'.trim())}` } );
-    postCount = await Findr.countDocuments();
+    console.log(req.query);
+    if(locations){
+    Findr = await FindrLocation.find( { tags: locations.tags } );
+    postCount = Findr.length;
     } else {
     Findr = await FindrLocation.find({});
     postCount = await FindrLocation.countDocuments();
     };
     console.log(Findr, postCount);
-    res.render('locations/index', { pageName: 'Posts', q, Findr, postCount });
+    res.render('locations/index', { pageName: 'Posts', locations, Findr, postCount });
 };
 
 module.exports.Id = async (req, res) => {
