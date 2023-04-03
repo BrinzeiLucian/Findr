@@ -21,7 +21,7 @@ module.exports.index = async (req, res, next) => {
     Findr = await FindrLocation.find({});
     postCount = await FindrLocation.countDocuments();
     };
-    console.log(Findr, postCount);
+    console.log(locations, Findr, postCount);
     res.render('locations/index', { pageName: 'Posts', locations, Findr, postCount });
 };
 

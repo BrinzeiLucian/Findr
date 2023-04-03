@@ -182,8 +182,26 @@
 </nav>
 </div>
 </div>
-</div>
 <div class="footer">
-	<%-include('../partials/footer')%>
+	<footer class="footer bg-dark py-2 mt-auto" id="footer">
+		<div class="">
+			<span class="text-muted">
+				<div class="text-center footer" id="footer-text">
+					&copy; Findr 2023
+				</div>
+			</span>
+		</div>
+	</footer>
+</div>
 </div>
 </body>
+<style>
+	.container{
+		min-height: calc(100vh - 211px - 40px) ;
+	}
+	.footer{
+    	width: 100%;
+    	text-align: center;
+		position: static;
+	}
+</style>
