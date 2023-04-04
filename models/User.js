@@ -1,18 +1,21 @@
 //imports
-let mongoose = require('mongoose');
-let passportMongoose = require('passport-local-mongoose');
+let mongoose = require("mongoose");
+let passportMongoose = require("passport-local-mongoose");
 let Schema = mongoose.Schema;
 
-let userSchema = new Schema({
+let userSchema = new Schema(
+  {
     email: {
-        type: String,
-        required: true,
-        unique: true
-    }
-},{
+      type: String,
+      required: true,
+      unique: true,
+    },
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
 userSchema.plugin(passportMongoose);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

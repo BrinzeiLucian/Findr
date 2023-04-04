@@ -1,17 +1,21 @@
 (function () {
-'use strict'
+  "use strict";
 
-// Fetch all the forms we want to apply custom Bootstrap validation styles to
-let forms = document.querySelectorAll('.validate-form')
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  let forms = document.querySelectorAll(".validate-form");
 
-// Loop over them and prevent submission
-Array.from(forms)
-.forEach(function (form) {
-form.addEventListener('submit', function (event) {
-if (!form.checkValidity()) {
-event.preventDefault()
-event.stopPropagation()
-}
-form.classList.add('was-validated')
-}, false)
-})})();
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(function (form) {
+    form.addEventListener(
+      "submit",
+      function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();

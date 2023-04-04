@@ -1,177 +1,196 @@
 :root {
-    scroll-behavior: smooth;
-    /*global colors variables*/
-    --white: #fff;
-    --shade-white: #f2f2f2;
-    --gray: #444444;
-    --second-gray: #a6a6a6;
-    --shadow: rgba(1, 41, 112, 0.08);
-    --black: #000;
-    --strong-blue: #4154f1;
-    --dark-blue: #012970;
-    --light-purple: #717ff5;
-    --orange: #e48e1e;
-    --light-orange: #fcbf70;
-    --create-pink: #962671;
+  scroll-behavior: smooth;
+  /*global colors variables*/
+  --white: #fff;
+  --shade-white: #f2f2f2;
+  --gray: #444444;
+  --second-gray: #a6a6a6;
+  --shadow: rgba(1, 41, 112, 0.08);
+  --black: #000;
+  --strong-blue: #4154f1;
+  --dark-blue: #012970;
+  --light-purple: #717ff5;
+  --orange: #e48e1e;
+  --light-orange: #fcbf70;
+  --create-pink: #962671;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: var(--gray);
+}
+
+a {
+  color: var(--orange);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--light-orange);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nunito", sans-serif;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--orange);
+}
+
+.hero h2 {
+  color: var(--gray);
+  margin: 15px 0 0 0;
+  font-size: 26px;
+}
+
+.hero .btn-get-started {
+  margin-top: 30px;
+  line-height: 0;
+  padding: 15px 40px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: var(--white);
+  background: var(--orange);
+}
+
+.hero .btn-get-started span {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.hero .btn-get-started i {
+  margin-left: 5px;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.hero .btn-get-started:hover i {
+  transform: translateX(5px);
+}
+
+.hero .hero-img {
+  text-align: right;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    background-attachment: fixed;
   }
-  
-  body {
-    font-family: "Open Sans", sans-serif;
-    color: var(--gray);
+}
+
+@media (max-width: 991px) {
+  .hero {
+    height: auto;
+    padding: 120px 0 60px 0;
   }
-  
-  a {
-    color: var(--orange);
-    text-decoration: none;
-  }
-  
-  a:hover {
-    color: var(--light-orange);
-    text-decoration: none;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Nunito", sans-serif;
-  }
-  
-  .hero h1 {
-    margin: 0;
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--orange);
-  }
-  
-  .hero h2 {
-    color: var(--gray);
-    margin: 15px 0 0 0;
-    font-size: 26px;
-  }
-  
-  .hero .btn-get-started {
-    margin-top: 30px;
-    line-height: 0;
-    padding: 15px 40px;
-    border-radius: 4px;
-    transition: 0.5s;
-    color: var(--white);
-    background: var(--orange);
-  }
-  
-  .hero .btn-get-started span {
-    font-family: "Nunito", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 1px;
-  }
-  
-  .hero .btn-get-started i {
-    margin-left: 5px;
-    font-size: 18px;
-    transition: 0.3s;
-  }
-  
-  .hero .btn-get-started:hover i {
-    transform: translateX(5px);
-  }
-  
+
   .hero .hero-img {
-    text-align: right;
-  }
-  
-  @media (min-width: 1024px) {
-    .hero {
-      background-attachment: fixed;
-    }
-  }
-  
-  @media (max-width: 991px) {
-    .hero {
-      height: auto;
-      padding: 120px 0 60px 0;
-    }
-  
-    .hero .hero-img {
-      text-align: center;
-      margin-top: 80px;
-    }
-  
-    .hero .hero-img img {
-      width: 80%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .hero {
-      text-align: center;
-    }
-  
-    .hero h1 {
-      font-size: 32px;
-    }
-  
-    .hero h2 {
-      font-size: 24px;
-    }
-  
-    .hero .hero-img img {
-      width: 100%;
-    }
-  }
-  
-  .values .box {
-    padding: 30px;
-    box-shadow: 0px 0 5px var(--shadow);
     text-align: center;
-    transition: 0.3s;
-    height: 100%;
+    margin-top: 80px;
   }
-  
-  .values .box img {
-    padding: 30px 50px;
-    transition: 0.5s;
-    transform: scale(1.1);
+
+  .hero .hero-img img {
+    width: 80%;
   }
-  
-  .values .box h3 {
+}
+
+@media (max-width: 768px) {
+  .hero {
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero h2 {
     font-size: 24px;
-    color: var(--orange);
-    font-weight: 700;
-    margin-bottom: 18px;
-  }
-  
-  .values .box:hover {
-    box-shadow: 0px 0 30px var(--shadow);
-  }
-  
-  .values .box:hover img {
-    transform: scale(1);
   }
 
-  .btn-create-post{
-    color: var(--black);
+  .hero .hero-img img {
+    width: 100%;
   }
+}
 
-  .wrapper {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .search-wrapper {
+.values .box {
+  padding: 30px;
+  box-shadow: 0px 0 5px var(--shadow);
+  text-align: center;
+  transition: 0.3s;
+  height: 100%;
+}
+
+.values .box img {
+  padding: 30px 50px;
+  transition: 0.5s;
+  transform: scale(1.1);
+}
+
+.values .box h3 {
+  font-size: 24px;
+  color: var(--orange);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.values .box:hover {
+  box-shadow: 0px 0 30px var(--shadow);
+}
+
+.values .box:hover img {
+  transform: scale(1);
+}
+
+.btn-create-post {
+  color: var(--black);
+}
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.search-wrapper {
   position: absolute;
   top: 0;
-  left:0;
+  left: 0;
   width: 100vh;
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+#search_button {
+  position: absolute;
+  width: auto;
+  height: auto;
+  margin-top: 25%;
+  margin-bottom: 25%;
+  margin-left: 40%;
+}
+
+/* media sizes */
+
+@media screen and (min-width: 320px) {
+  .search-wrapper input {
+    width: 75%;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 50%;
   }
-  
-  #search_button{
+
+  #search_button {
     position: absolute;
     width: auto;
     height: auto;
@@ -179,152 +198,123 @@
     margin-bottom: 25%;
     margin-left: 40%;
   }
+}
 
-  /* media sizes */
-
-  @media screen and (min-width: 320px) {
-    .search-wrapper input {
-      width: 75%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 50%;
-    }
-
-    #search_button{
-      position: absolute;
-      width: auto;
-      height: auto;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 40%;
-    }
-
-  }
-  
-  @media screen and (min-width: 480px) {
-    .search-wrapper input {
-      width: 75%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 50%;
-    }
-
-    #search_button{
-      position: absolute;
-      width: auto;
-      height: auto;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 40%;
-    }
-
+@media screen and (min-width: 480px) {
+  .search-wrapper input {
+    width: 75%;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 50%;
   }
 
+  #search_button {
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 40%;
+  }
+}
 
-  @media screen and (min-width: 600px) {
-    .search-wrapper input {
-      width: 75%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 50%;
-    }
-
-    #search_button{
-      position: absolute;
-      width: auto;
-      height: auto;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 40%;
-    }
-
+@media screen and (min-width: 600px) {
+  .search-wrapper input {
+    width: 75%;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 50%;
   }
 
-  @media screen and (min-width: 768px) {
-    .search-wrapper input {
-      width: 75%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 50%;
-    }
+  #search_button {
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 40%;
+  }
+}
 
-    #search_button{
-      position: absolute;
-      width: auto;
-      height: auto;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 40%;
-    }
-
+@media screen and (min-width: 768px) {
+  .search-wrapper input {
+    width: 75%;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 50%;
   }
 
+  #search_button {
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 40%;
+  }
+}
 
-  @media screen and (min-width: 900px) {
-    .search-wrapper input {
-      width: 75%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 50%;
-    }
-
-    #search_button{
-      position: absolute;
-      width: auto;
-      height: auto;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 40%;
-    }
-
+@media screen and (min-width: 900px) {
+  .search-wrapper input {
+    width: 75%;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 50%;
   }
 
-  @media screen and (min-width: 1024px) {
-    .search-wrapper input {
-      width: 75%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 50%;
-    }
+  #search_button {
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 40%;
+  }
+}
 
-    #search_button{
-      position: absolute;
-      width: auto;
-      height: auto;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 40%;
-    }
-
+@media screen and (min-width: 1024px) {
+  .search-wrapper input {
+    width: 75%;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 50%;
   }
 
+  #search_button {
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 40%;
+  }
+}
 
-  @media screen and (min-width: 1200px) {
-    .search-wrapper input {
-      width: 75%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 50%;
-    }
-
-    #search_button{
-      position: absolute;
-      width: auto;
-      height: auto;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 40%;
-    }
-
+@media screen and (min-width: 1200px) {
+  .search-wrapper input {
+    width: 75%;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 50%;
   }
 
-  .footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
+  #search_button {
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top: 25%;
+    margin-bottom: 25%;
+    margin-left: 40%;
   }
+}
 
-  .index-btn-orange{
-    background: var(--orange);
-  }
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.index-btn-orange {
+  background: var(--orange);
+}
